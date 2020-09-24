@@ -1,0 +1,77 @@
+<?php
+
+namespace App\Services;
+
+use App\Models\Answer;
+use App\Enums\TimeMode;
+use App\Models\Exam;
+use App\Models\Participant;
+use App\Models\Section;
+use App\Services\Exams\BasicExam;
+use App\Services\Exams\TimeLimitExam;
+use Carbon\Carbon;
+use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\Auth;
+
+class ParticipantService
+{
+    static $service;
+
+    public static function examRouter(Exam $exam)
+    {
+        $config = $exam->config;
+        if ($config->time_mode == TimeMode::TimeLimit) {
+            static::$service = new TimeLimitExam();
+        } else {
+            static::$service = new BasicExam();
+        }
+    }
+
+    public static function join(Exam $exam)
+    {
+        self::examRouter($exam);
+
+        return static::$service->join($exam);
+    }
+
+    public static function getParticipantAnswers(Participant $participant)
+    {
+        return Answer::withSectionOrder()
+            ->withOptionUuid()
+            ->where('participant_id', $participant->id)
+            ->orderBy('section_order', 'asc')
+            ->orderBy('id', 'asc')
+            ->get();
+    }
+
+    public static function getNavigation(Participant $participant, Answer $answer, Collection $answers)
+    {
+        foreach ($answers as $key => $item) {
+            if ($item->id === $answer->id) {
+                return [
+                    'next' => !isset($answers[$key+1]) ? null : static::generateNextUrl($participant, $item, $answers[$key+1]),
+                    'prev' => $key == 0 ? null : route('participant.exams.process', [
+                        'participant' => $participant->uuid,
+                        'answer' => $answers[$key-1]->uuid
+                    ])
+                ];
+            }
+        }
+        return ['next' => null,'prev' => null];
+    }
+
+    public static function generateNextUrl($participant, $answer, $nextAnswer)
+    {
+        if ($nextAnswer->section_id == $answer->section_id) {
+            return route('participant.exams.process', [
+                'participant' => $participant->uuid,
+                'answer' => $nextAnswer->uuid
+            ]);
+        }
+        return route('participant.exams.section', [
+            'participant' => $participant->uuid,
+            'answer' => $nextAnswer->uuid,
+            'section' => Section::find($nextAnswer->section_id)->uuid,
+        ]);
+    }
+}

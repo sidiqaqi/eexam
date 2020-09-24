@@ -1,0 +1,21 @@
+{
+    "Exam": "Ujian",
+    "Creator": "Penyelenggara",
+    "Participant": "Peserta",
+    "Config": "Pengaturan",
+    "Section": "Sesi",
+    "Login": "Masuk",
+    "Logout": "Keluar",
+    "Question": "Pertanyaan",
+    "Option": "Jawaban",
+    "Title": "Judul",
+    "Order": "Urutan",
+    "Code": "Kode",
+    "Previous": "Sebelumnya",
+    "Next": "Selanjutnya",
+    "There is one form error." : "Terdapat sebuah kesalahan.",
+    "There are :errors form errors." : "Terdapat :errors kesalahan.",
+    "Forgot your password? No problem. Just let us know your email address and we will email you a password reset link that will allow you to choose a new one." : "Lupa password anda? Tidak masalah. Beri tau email anda, Maka kami akan mengirimkan link untuk mengganti password anda dengan yang baru.",
+    "Thanks for signing up! Before getting started, could you verify your email address by clicking on the link we just emailed to you? If you didn't receive the email, we will gladly send you another." : "Terima kasih telah mendaftar! Sebelum memulai, dapatkah Anda memverifikasi alamat email Anda dengan mengklik link yang kami kirimkan kepada Anda? Jika Anda tidak menerima email tersebut, kami dengan senang hati akan mengirimkan lagi.",
+    "A new verification link has been sent to the email address you provided during registration." : "Tautan verifikasi baru telah dikirim ke alamat email yang Anda berikan saat pendaftaran."
+}
