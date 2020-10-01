@@ -122,6 +122,7 @@ return [
     'correct_value' => 'Harus ada satu jawaban benar.',
     'no_questions' => 'Ada sesi yang belum memiliki pertanyaan.',
     'no_sections' => 'Ujian ini belum memiliki sesi.',
+    'need_question' => 'Ujian ini belum cukup memiliki soal agar peserta dapat lulus.',
     'participate' => 'Anda telah mengikuti ujian ini.',
 
     /*

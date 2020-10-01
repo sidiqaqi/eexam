@@ -6,7 +6,8 @@
         </template>
 
         <template #description>
-            Pengaturan dasar ujian.
+            Pengaturan dasar ujian. <br/><br/>
+            <span class="text-red-500"><strong>Peringatan!</strong> mengganti pengaturan tidak akan mempengaruhi hasil/pengaturan peserta yang telah melakukan test. Apabila terpaksa lebih baik untuk anda agar membuat ujian baru dengan melakukan duplikasi ujian yang pernah ada.</span>
         </template>
 
         <template #form>
@@ -37,8 +38,7 @@
                 <jet-label for="question_order" value="Urutan soal *"/>
                 <input-basic-select id="question_order" ref="time-mode" v-model="form.config.question_order"
                                     autocomplete="time-mode"
-                                    class="mt-1 block w-full"
-                                    type="text">
+                                    class="mt-1 block w-full">
                     <option v-for="(value, key) in question_order" :key="key" :value="key">{{ value }}</option>
                 </input-basic-select>
                 <jet-input-error :message="$page.errors.question_order" class="mt-2"/>
@@ -53,6 +53,50 @@
                     <option v-for="(value, key) in answer_order" :key="key" :value="key">{{ value }}</option>
                 </input-basic-select>
                 <jet-input-error :message="$page.errors.answer_order" class="mt-2"/>
+            </div>
+
+            <div class="col-span-6 sm:col-span-4">
+                <jet-label for="score_status" value="Pengaturan bobot soal *"/>
+                <input-basic-select id="score_status" ref="time-mode" v-model="form.config.score_status"
+                                    autocomplete="score_status"
+                                    class="mt-1 block w-full">
+                    <option v-for="(value, key) in score_status" :key="key" :value="key">{{ value }}</option>
+                </input-basic-select>
+                <jet-input-error :message="$page.errors.score_status" class="mt-2"/>
+            </div>
+
+            <div class="col-span-6 sm:col-span-4">
+                <jet-label for="passing_grade_status" value="Pengaturan passing grade *"/>
+                <input-basic-select id="passing_grade_status" ref="time-mode" v-model="form.config.passing_grade_status"
+                                    autocomplete="passing_grade_status"
+                                    class="mt-1 block w-full">
+                    <option v-for="(value, key) in passing_grade_status" :key="key" :value="key">{{ value }}</option>
+                </input-basic-select>
+                <jet-input-error :message="$page.errors.passing_grade_status" class="mt-2"/>
+            </div>
+
+            <div class="col-span-6 sm:col-span-4">
+                <jet-label for="default_score" value="Default bobot soal*"/>
+                <jet-input
+                    id="default_score"
+                    v-model="form.config.default_score"
+                    class="mt-1 block w-full"
+                    placeholder="contoh: 10"
+                    type="number"
+                />
+                <jet-input-error :message="$page.errors.default_score" class="mt-2"/>
+            </div>
+
+            <div class="col-span-6 sm:col-span-4">
+                <jet-label for="default_passing_grade" value="Default passing grade*"/>
+                <jet-input
+                    id="default_passing_grade"
+                    v-model="form.config.default_passing_grade"
+                    class="mt-1 block w-full"
+                    placeholder="contoh: 100"
+                    type="number"
+                />
+                <jet-input-error :message="$page.errors.default_passing_grade" class="mt-2"/>
             </div>
 
             <div class="col-span-6 sm:col-span-4">
@@ -122,6 +166,8 @@ export default {
         ranking_status: Object,
         result_status: Object,
         time_mode: Object,
+        score_status: Object,
+        passing_grade_status: Object,
         exam: Object,
         config: Object,
     },
@@ -135,7 +181,11 @@ export default {
                     time_mode: this.config.time_mode,
                     time_limit: this.config.time_limit,
                     ranking_status: this.config.ranking_status,
-                    result_status: this.config.result_status
+                    result_status: this.config.result_status,
+                    score_status: this.config.score_status,
+                    passing_grade_status: this.config.passing_grade_status,
+                    default_score: this.config.default_score,
+                    default_passing_grade: this.config.default_passing_grade,
                 }, {
                     bag: 'updateConfig',
                     resetOnSuccess: false,

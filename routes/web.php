@@ -24,6 +24,7 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function() {
     Route::get('/dashboard', 'App\Http\Controllers\HomeController@dashboard')->name('dashboard');
 
     Route::prefix('creator')->name('creator.')->group(function () {
+        Route::get('/menu', 'App\Http\Controllers\HomeController@creator');
         Route::resource('/exams', 'App\Http\Controllers\Creator\ExamController');
         Route::put('/exams-publish/{exam}', 'App\Http\Controllers\Creator\ExamController@publish')->name('exams.publish');
         Route::resource('/configs', 'App\Http\Controllers\Creator\ConfigController')->only('update');
@@ -48,6 +49,7 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function() {
     });
 
     Route::prefix('participant')->name('participant.')->group(function () {
+        Route::get('/menu', 'App\Http\Controllers\HomeController@participant');
         Route::prefix('/exams')->group(function () {
             Route::get('form', 'App\Http\Controllers\Participant\ExamController@form')->name('exams.form');
             Route::post('details', 'App\Http\Controllers\Participant\ExamController@details')->name('exams.details.post');
@@ -57,9 +59,12 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function() {
             Route::get('process/{participant}/{answer}', 'App\Http\Controllers\Participant\ExamController@process')->name('exams.process');
             Route::post('submit/{participant}/{answer}/{option}', 'App\Http\Controllers\Participant\ExamController@submit')->name('exams.submit.post');
             Route::post('previous/{participant}/{answer}', 'App\Http\Controllers\Participant\ExamController@previous')->name('exams.previous.post');
+            Route::get('recap/{participant}', 'App\Http\Controllers\Participant\ExamController@recap')->name('exams.recap');
+            Route::post('finish/{participant}', 'App\Http\Controllers\Participant\ExamController@finish')->name('exams.finish');
         });
         Route::prefix('/results')->group(function () {
             Route::get('/', 'App\Http\Controllers\Participant\ResultController@index')->name('results.index');
+            Route::get('/{participant}', 'App\Http\Controllers\Participant\ResultController@show')->name('results.show');
         });
     });
 });

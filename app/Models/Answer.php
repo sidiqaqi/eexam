@@ -12,6 +12,8 @@ use Ramsey\Uuid\Uuid;
  * @property mixed uuid
  * @property mixed option_id
  * @property mixed id
+ * @property mixed is_correct
+ * @property int|mixed score
  * @method static withSectionOrder()
  * @method static withOptionUuid()
  */
@@ -44,6 +46,14 @@ class Answer extends Model
     public function question()
     {
         return $this->belongsTo('App\Models\Question');
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function option()
+    {
+        return $this->belongsTo('App\Models\Option');
     }
 
     /**

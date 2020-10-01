@@ -1,27 +1,33 @@
 <template>
-    <layout :title="'Proses Ujian - ' + $page.app.name" active="participant.exams.form">
-        <b-card class="col-auto mb-2" v-if="section">
-            <h4>{{ section.name }}</h4>
-            <vue-markdown
-                :breaks="markdown.breaks"
-                :emoji="markdown.emoji"
-                :html="markdown.html"
-                :linkify="markdown.linkify"
-                :show="markdown.show"
-                :source="section.instruction"
-                :toc="markdown.toc"
-                :typographer="markdown.typographer"
-                :watches="['markdown.show','markdown.html','markdown.breaks','markdown.linkify','markdown.emoji','markdown.typographer','markdown.toc']"
-                class="result-html full-height"
-                toc-id="toc"
-            ></vue-markdown>
-            <div class="row justify-content-center pt-5">
-                <inertia-link :href="$route('participant.exams.process', {'participant' : participant.uuid, 'answer' : answer.uuid})"
-                              class="btn btn-outline-secondary col-md-4 col-sm-8 col-8"
-                              type="submit">Mulai
-                </inertia-link>
+    <layout :title="'Proses Ujian - ' + exam.data.name +' - '+ $page.app.name" active="participant.exams.form">
+
+        <template v-slot:header>
+            <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+                Jeda Sesi: {{ exam.data.name }}
+            </h2>
+            <vue-countdown v-if="config.data.time_mode === 2" :time="time_limit" tag="p" @end="forceFinish">
+                <template
+                    slot-scope="props"
+                >Time Remaining：{{ props.minutes }} minutes, {{ props.seconds }} seconds.</template>
+            </vue-countdown>
+        </template>
+
+        <div>
+            <div class="grid max-w-7xl mx-auto py-10 sm:px-6 lg:px-8 justify-items-center" v-if="section">
+                <div class="grid w-full md:w-4/5 sm:w-full xs:w-full rounded bg-white justify-items-center p-5">
+                <h4>{{ section.data.name }}</h4>
+                <div class="py-3 min-h-full" style="min-height: 100px">
+                    <div v-html="compiledMarkdown" class="prose"></div>
+                </div>
+                <div class="row justify-content-center pt-5">
+                    <inertia-link :href="'/participant/exams/process/' + participant.data.uuid + '/' + answer.data.uuid"
+                                  class="inline-flex items-center px-4 py-2 bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:shadow-outline-gray transition ease-in-out duration-150 ml-5"
+                                  type="submit">Mulai
+                    </inertia-link>
+                </div>
+                </div>
             </div>
-        </b-card>
+        </div>
     </layout>
 </template>
 
@@ -29,35 +35,32 @@
 import Layout from '@/Layouts/Exam'
 import InputText from '@/Shared/InputText'
 import ButtonLoading from '@/Shared/ButtonLoading'
-import VueMarkdown from 'vue-markdown'
+import marked from 'marked'
+import VueCountdown from "@chenfengyuan/vue-countdown"
 
 export default {
     components: {
         Layout,
         InputText,
         ButtonLoading,
-        VueMarkdown
+        VueCountdown,
     },
     props: {
         answer: Object,
-        answers: Array,
+        answers: Object,
         config: Object,
         exam: Object,
         section: Object,
         participant: Object,
+        time_limit: Number,
+    },
+    computed: {
+        compiledMarkdown: function() {
+            return marked(this.section.data.instruction);
+        }
     },
     data () {
         return {
-            markdown: {
-                show: true,
-                html: false,
-                breaks: true,
-                linkify: false,
-                emoji: true,
-                typographer: true,
-                toc: false
-            },
-            sending: false,
             form: {
                 code: null
             }
@@ -68,30 +71,8 @@ export default {
             return String.fromCharCode('A'.charCodeAt() + key)
         },
         details () {
-            this.$inertia.post(
-                this.$route('participant.exams.details.post'),
-                this.form
-            )
+            this.$inertia.post('/participant/exams/details', this.form)
         }
     }
 }
 </script>
-
-<style scoped>
-.section-title {
-    cursor: pointer;
-}
-
-.flip-list-move {
-    transition: transform 0.5s;
-}
-
-.no-move {
-    transition: transform 0s;
-}
-
-.ghost {
-    opacity: 0.5;
-    background: #c8ebfb;
-}
-</style>>

@@ -13,6 +13,7 @@ use App\Http\Requests\Creator\Exam\UpdateRequest;
 use App\Http\Requests\Creator\Exam\StoreRequest;
 use App\Http\Resources\ExamResource;
 use App\Services\ConfigService;
+use App\Services\PublishExamService;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
@@ -32,7 +33,7 @@ class ExamController extends Controller
             'filters' => $request->all('search'),
             'exams' => ExamResource::collection(
                 Exam::filter(new ExamFilter($request))
-                    ->select(['uuid', 'name' , 'description', 'status_id'])
+                    ->select(['uuid', 'name' , 'description', 'code', 'status_id'])
                     ->owner(Auth::user())
                     ->paginate($perPage)
                     ->appends($request->all('search'))
@@ -110,14 +111,10 @@ class ExamController extends Controller
      */
     public function publish(PublishRequest $request, Exam $exam)
     {
-        if (!$exam->sections->count()) {
-            return redirect()->back()->withErrors(['exam' => [__('validation.no_sections')]]);
-        }
+        $validation = PublishExamService::validate($exam);
 
-        foreach ($exam->sections as $section) {
-            if (!$section->questions()->count()) {
-                return redirect()->back()->withErrors(['exam' => [__('validation.no_questions')]]);
-            }
+        if ($validation->isHasErrors()) {
+            return redirect()->back()->withErrors($validation->getErrors());
         }
 
         $exam->status_id = $exam->status_id == ExamStatus::Publish ? ExamStatus::Draft : ExamStatus::Publish;

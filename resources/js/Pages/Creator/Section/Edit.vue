@@ -49,7 +49,7 @@
                             <jet-input-error :message="$page.errors.instruction" class="mt-2"/>
                         </div>
 
-                        <div class="col-span-6 sm:col-span-4">
+                        <div v-if="config.score_status === 2" class="col-span-6 sm:col-span-4">
                             <jet-label for="score_per_question" value="Nilai per Soal *"/>
                             <jet-input id="score_per_question" ref="exam-name" v-model="form.score_per_question"
                                        autocomplete="score_per_question"
@@ -60,7 +60,7 @@
                             <jet-input-error :message="$page.errors.score_per_question" class="mt-2"/>
                         </div>
 
-                        <div class="col-span-6 sm:col-span-4">
+                        <div v-if="config.passing_grade_status === 2" class="col-span-6 sm:col-span-4">
                             <jet-label for="passing_grade" value="Passing Grade *"/>
                             <jet-input id="passing_grade" ref="exam-name" v-model="form.passing_grade"
                                        autocomplete="passing_grade"
@@ -91,7 +91,7 @@
 </template>
 
 <script>
-import Layout from "@/Layouts/Creator";
+import Layout from "@/Layouts/AppLayout";
 import ButtonLoading from "@/Shared/ButtonLoading";
 import marked from "marked";
 import JetActionMessage from '@/Jetstream/ActionMessage'

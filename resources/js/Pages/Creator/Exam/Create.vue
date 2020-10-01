@@ -13,7 +13,10 @@
                     </template>
 
                     <template #description>
-                        Ensure your account is using a long, random password to stay secure.
+                        Sebisa mungkin informasi yang anda berikan agar sangat jelas untuk menggambarkan detail ujian tersebut.
+                       <br/>
+                       <br/>
+                        Pastikan juga anda memilih kode ujian yang unik.
                     </template>
 
                     <template #form>
@@ -63,7 +66,7 @@
 </template>
 
 <script>
-import Layout from "@/Layouts/Creator";
+import Layout from "@/Layouts/AppLayout";
 import JetButton from '@/Jetstream/Button'
 import JetFormSection from '@/Jetstream/FormSection'
 import JetInput from '@/Jetstream/Input'

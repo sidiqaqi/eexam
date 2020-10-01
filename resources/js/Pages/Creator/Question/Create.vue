@@ -51,6 +51,17 @@
                     </template>
 
                     <template #form>
+                        <div v-if="config.score_status === 3" class="col-span-6 sm:col-span-4">
+                            <jet-label for="score" value="Nilai per Soal *"/>
+                            <jet-input id="score" ref="score" v-model="form.score"
+                                       autocomplete="score"
+                                       class="mt-1 block w-full"
+                                       min="0"
+                                       placeholder="contoh: 10" required
+                                       type="number"/>
+                            <jet-input-error :message="$page.errors.score" class="mt-2"/>
+                        </div>
+
                         <div class="col-span-6 sm:col-span-4">
                             <jet-label for="question_type" value="Tipe soal:"/>
                             <input-basic-select id="question_type" ref="time-mode" v-model="form.question_type"
@@ -167,7 +178,7 @@
 </template>
 
 <script>
-import Layout from "@/Layouts/Creator";
+import Layout from "@/Layouts/AppLayout";
 import Icon from "@/Shared/Icon";
 import marked from "marked";
 import JetButton from '@/Jetstream/Button'
@@ -207,6 +218,7 @@ export default {
             answer: null,
             answerKey: null,
             form: this.$inertia.form({
+                score: 10,
                 question_title: "",
                 question_value: "",
                 question_type: 1,

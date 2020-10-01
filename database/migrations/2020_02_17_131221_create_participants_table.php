@@ -19,7 +19,7 @@ class CreateParticipantsTable extends Migration
             $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('exam_id');
             $table->unsignedBigInteger('random_key');
-            $table->unsignedBigInteger('score')->nullable();
+            $table->text('cache_config')->nullable();
             $table->timestamp('finish_at')->nullable();
             $table->timestamps();
 

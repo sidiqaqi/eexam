@@ -1,49 +1,83 @@
 <template>
-  <layout :title="'Hasil Ujian - ' + $page.app.name" active="participant.results.index">
-    <template v-slot:header>
-      <h3 class="d-inline">
-        Hasil Ujian
-      </h3>
-    </template>
-    <div class="row  no-gutters">
-    </div>
-  </layout>
+    <layout
+        :title="'Halaman Penyelenggara - ' + $page.app.name"
+        active="creator.exams.index"
+        page="Daftar Ujian"
+    >
+        <template v-slot:header>
+            <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+                Hasil Ujian
+            </h2>
+        </template>
+
+        <div>
+            <div class="max-w-7xl mx-auto py-10 sm:px-6 lg:px-8">
+                <div class="grid gap-4 justify-items-stretch my-3">
+                    <table class="table-auto border-collapse border border-gray-300">
+                        <thead>
+                        <tr class="bg-white border border-gray-300">
+                            <th class="py-3">Nama ujian</th>
+                            <th class="py-3">Creator</th>
+                            <th class="py-3">Status</th>
+                            <th class="py-3">Aksi</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr v-for="participant in participants.data" :key="participant.uuid">
+                            <td class="align-middle border px-4 py-2">{{ participant.exam }}</td>
+                            <td class="align-middle border px-4 py-2">{{ participant.creator }}</td>
+                            <td class="align-middle border px-4 py-2">
+                                <span v-if="participant.on_going"> Dalam proses</span>
+                                <span v-else>Selesai</span>
+                            </td>
+                            <td class="align-middle border px-4 py-2">
+                                <inertia-link v-if="!participant.on_going" class="underline" :href="'/participant/results/' + participant.uuid "> lihat hasil </inertia-link>
+                                <span v-else>-</span>
+                            </td>
+                        </tr>
+                        <tr v-if="!participants.meta.total">
+                            <td class="text-center py-3" colspan="4">Tidak ada ujian</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <pagination :links="participants.meta.links" />
+            </div>
+        </div>
+    </layout>
 </template>
 
 <script>
-import Layout from "@/Layouts/Participant"
+import Layout from "@/Layouts/AppLayout"
+import Icon from "@/Shared/Icon"
+import pickBy from 'lodash/pickBy'
+import throttle from 'lodash/throttle'
+import JetDialogModal from '@/Jetstream/DialogModal'
+import JetDangerButton from '@/Jetstream/DangerButton'
+import JetSecondaryButton from '@/Jetstream/SecondaryButton'
+import Pagination from "@/Shared/Pagination";
+import JetDropdown from "@/Jetstream/Dropdown";
+
 
 export default {
-  components: {
-    Layout,
-  },
-  data() {
-    return {
-      form : {
-        code : null
-      }
-    }
-  },
-  methods: {
-    join() {
-      this.$inertia.post(this.$route("participant.exams.join", this.form))
+    props: {
+        participants: Object,
     },
-  }
+    components: {
+        Layout,
+        Icon,
+        JetDialogModal,
+        JetDangerButton,
+        JetSecondaryButton,
+        JetDropdown,
+        Pagination,
+    },
+    data() {
+        return {
+            confirmingDelete: false,
+        }
+    },
+    methods: {
+    }
 };
 </script>
-
-<style scoped>
-.section-title {
-  cursor: pointer;
-}
-.flip-list-move {
-  transition: transform 0.5s;
-}
-.no-move {
-  transition: transform 0s;
-}
-.ghost {
-  opacity: 0.5;
-  background: #c8ebfb;
-}
-</style>>

@@ -6,11 +6,13 @@ use BenSampo\Enum\Contracts\LocalizedEnum;
 use BenSampo\Enum\Enum;
 
 /**
- * @method static static False()
- * @method static static True()
+ * @method static static RecapAndResult()
+ * @method static static ResultOnly()
+ * @method static static HideAll()
  */
 final class ResultStatus extends Enum implements LocalizedEnum
 {
-    const Show = 1;
-    const Hide = 2;
+    const RecapAndResult = 1;
+    const ResultOnly = 2;
+    const HideAll = 3;
 }

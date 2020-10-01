@@ -20,8 +20,7 @@ class TimeLimitExam extends BasicExam
 
         if ($config->time_mode == TimeMode::TimeLimit) {
             if ($now->gt($participant->created_at->addMinutes($config->time_limit))) {
-                $participant->finish_at = $now;
-                $participant->save();
+                $this->markAsFinish($participant, $now);
                 return false;
             }
         }

@@ -23,6 +23,9 @@ class CreateAnswersTable extends Migration
             $table->unsignedBigInteger('option_id')->nullable();
             $table->unsignedSmallInteger('is_correct')->nullable();
             $table->unsignedBigInteger('score')->nullable();
+
+            $table->timestamp('start_at')->nullable();
+            $table->timestamp('finish_at')->nullable();
             $table->timestamps();
 
             $table->foreign('participant_id')

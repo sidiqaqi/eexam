@@ -39,16 +39,18 @@
 
                 <jet-section-border/>
 
-                <edit-config :answer_order="answer_order"
+                <edit-config class="md:grid md:grid-cols-3 md:gap-6 mt-10 sm:mt-0" :answer_order="answer_order"
                              :config="config"
                              :exam="exam"
                              :question_order="question_order"
                              :ranking_status="ranking_status"
                              :result_status="result_status"
-                             :time_mode="time_mode"/>
+                             :time_mode="time_mode"
+                             :score_status="score_status"
+                             :passing_grade_status="passing_grade_status"/>
                 <jet-section-border/>
 
-                <jet-form-section @submitted="false">
+                <jet-form-section @submitted="false" class="md:grid md:grid-cols-3 md:gap-6 mt-10 sm:mt-0">
                     <template #title>
                         <icon class="inline" name="list-task"/>
                         Sesi & Soal
@@ -60,7 +62,7 @@
 
                     <template #form>
                         <div class="col-span-6 sm:col-span-4">
-                        <inertia-link class="w-full mx-4 inline-flex items-center px-4 py-2 bg-white border border-gray-300 rounded-md font-semibold text-xs text-gray-700 uppercase tracking-widest shadow-sm hover:text-gray-500 focus:outline-none focus:border-blue-300 focus:shadow-outline-blue active:text-gray-800 active:bg-gray-50 transition ease-in-out duration-150" :href="'/creator/sections/' + exam.uuid">Menuju Sesi & Soal</inertia-link>
+                        <inertia-link class="w-full inline-flex items-center px-4 py-2 bg-white border border-gray-300 rounded-md font-semibold text-xs text-gray-700 uppercase tracking-widest shadow-sm hover:text-gray-500 focus:outline-none focus:border-blue-300 focus:shadow-outline-blue active:text-gray-800 active:bg-gray-50 transition ease-in-out duration-150" :href="'/creator/sections/' + exam.uuid">Menuju Sesi & Soal</inertia-link>
                         </div>
                     </template>
 
@@ -71,7 +73,7 @@
 </template>
 
 <script>
-import Layout from '@/Layouts/Creator'
+import Layout from '@/Layouts/AppLayout'
 import Icon from '@/Shared/Icon'
 import JetButton from '@/Jetstream/Button'
 import JetDangerButton from "@/Jetstream/DangerButton";
@@ -97,6 +99,8 @@ export default {
         ranking_status: Object,
         result_status: Object,
         time_mode: Object,
+        score_status: Object,
+        passing_grade_status: Object,
         exam: Object,
         config: Object
     },

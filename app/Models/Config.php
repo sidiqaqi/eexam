@@ -20,6 +20,10 @@ class Config extends Model
         'answer_order',
         'result_status',
         'ranking_status',
+        'score_status',
+        'passing_grade_status',
+        'default_score',
+        'default_passing_grade',
     ];
 
     /**

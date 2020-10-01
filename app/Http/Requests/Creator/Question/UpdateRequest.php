@@ -4,11 +4,22 @@ namespace App\Http\Requests\Creator\Question;
 
 use App\Enums\CorrectStatus;
 use App\Enums\InputType;
+use App\Enums\ScoreStatus;
+use App\Models\Config;
 use App\Rules\CorrectValue;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\Rule;
 
+/**
+ * @property mixed question
+ * @property mixed score
+ * @property mixed question_title
+ * @property mixed question_value
+ * @property mixed question_type
+ * @property mixed question_image
+ * @property mixed options
+ */
 class UpdateRequest extends FormRequest
 {
     /**
@@ -29,6 +40,12 @@ class UpdateRequest extends FormRequest
     public function rules()
     {
         return [
+            'score' => [
+                'required',
+                'numeric',
+                'min:1',
+                'max:1000',
+            ],
             'question_title' => [
                 'required',
                 'min:1',
@@ -97,6 +114,7 @@ class UpdateRequest extends FormRequest
     public function dataQuestion()
     {
         return [
+            'score' => $this->score,
             'title' => $this->question_title,
             'value' => $this->question_value,
             'type' => $this->question_type,
@@ -110,5 +128,21 @@ class UpdateRequest extends FormRequest
     public function dataOptions()
     {
         return $this->options;
+    }
+
+    /**
+     * Prepare the data for validation.
+     *
+     * @return void
+     */
+    protected function prepareForValidation()
+    {
+        $config = Config::query()->where('exam_id', $this->question->section->exam_id)->first();
+
+        if ($config->score_status !== ScoreStatus::Question) {
+            $this->merge([
+                'score' => 10,
+            ]);
+        }
     }
 }

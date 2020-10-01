@@ -32,7 +32,6 @@
         "marked": "^1.1.1",
         "nprogress": "^0.2.0",
         "postcss-nesting": "^7.0.1",
-        "vue-markdown": "^2.2.4",
         "vuedraggable": "^2.24.1"
     }
 }

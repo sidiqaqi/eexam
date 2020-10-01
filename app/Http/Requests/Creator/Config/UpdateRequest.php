@@ -3,13 +3,27 @@
 namespace App\Http\Requests\Creator\Config;
 
 use App\Enums\AnswerOrderStatus;
+use App\Enums\PassingGradeStatus;
 use App\Enums\QuestionOrderStatus;
 use App\Enums\RankingStatus;
 use App\Enums\ResultStatus;
+use App\Enums\ScoreStatus;
 use App\Enums\TimeMode;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 
+/**
+ * @property mixed time_limit
+ * @property mixed time_mode
+ * @property mixed question_order
+ * @property mixed answer_order
+ * @property mixed result_status
+ * @property mixed ranking_status
+ * @property mixed default_score
+ * @property mixed default_passing_grade
+ * @property mixed score_status
+ * @property mixed passing_grade_status
+ */
 class UpdateRequest extends FormRequest
 {
     /**
@@ -56,7 +70,27 @@ class UpdateRequest extends FormRequest
             'ranking_status' => [
                 'required',
                 Rule::in(RankingStatus::getValues()),
-            ]
+            ],
+            'score_status' => [
+                'required',
+                Rule::in(ScoreStatus::getValues()),
+            ],
+            'passing_grade_status' => [
+                'required',
+                Rule::in(PassingGradeStatus::getValues()),
+            ],
+            'default_score' => [
+                'required',
+                'numeric',
+                'min:1',
+                'max:1000'
+            ],
+            'default_passing_grade' => [
+                'required',
+                'numeric',
+                'min:1',
+                'max:100000',
+            ],
         ];
     }
 
@@ -72,6 +106,10 @@ class UpdateRequest extends FormRequest
             'answer_order' => $this->answer_order,
             'result_status' => $this->result_status,
             'ranking_status' => $this->ranking_status,
+            'score_status' => $this->score_status,
+            'passing_grade_status' => $this->passing_grade_status,
+            'default_score' => $this->default_score,
+            'default_passing_grade' => $this->default_passing_grade,
         ];
     }
 }

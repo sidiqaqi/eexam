@@ -11,7 +11,6 @@ trait HasOwner
      * @param Builder $query
      * @param User $user
      * @return Builder
-     * @noinspection PhpUnused
      */
     public function scopeOwner(Builder $query, User $user)
     {

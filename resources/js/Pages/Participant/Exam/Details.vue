@@ -7,8 +7,8 @@
         </template>
 
         <div>
+            <error-message :message="$page.errors.join"/>
             <div class="grid max-w-7xl mx-auto py-10 sm:px-6 lg:px-8 justify-items-center">
-                <jet-input-error :message="$page.errors.join" class="mt-2"/>
                 <div class="grid w-full md:w-4/5 sm:w-full xs:w-full rounded bg-white justify-items-center p-5">
                     <div class="mb-5">
                         <h1 class="font-semibold text-xl text-gray-800 leading-tight">{{ exam.data.name }}</h1>
@@ -43,7 +43,7 @@
 import Layout from "@/Layouts/Exam";
 import JetLabel from "@/Jetstream/Label";
 import JetInput from "@/Jetstream/Input";
-import JetInputError from "@/Jetstream/InputError";
+import ErrorMessage from "@/Shared/ErrorMessages";
 import JetButton from "@/Jetstream/Button";
 
 export default {
@@ -51,7 +51,7 @@ export default {
         Layout,
         JetInput,
         JetLabel,
-        JetInputError,
+        ErrorMessage,
         JetButton,
     },
     props: {

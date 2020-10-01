@@ -20,12 +20,13 @@ use Ramsey\Uuid\Uuid;
  * @property mixed answer
  * @property mixed section_id
  * @property mixed order
+ * @property mixed score
  */
 class Question extends Model
 {
     use Filterable, HasOwner;
 
-    protected $fillable = ['user_id', 'section_id', 'type', 'title', 'value', 'image', 'order', 'time_limit'];
+    protected $fillable = ['user_id', 'section_id', 'section_id', 'type', 'title', 'value', 'image', 'order', 'time_limit', 'score'];
 
     /**
      * Setup model event hooks

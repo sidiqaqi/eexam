@@ -6,6 +6,8 @@ use App\Models\Answer;
 use App\Enums\TimeMode;
 use App\Models\Exam;
 use App\Models\Participant;
+use App\Models\Recap;
+use App\Services\RecapService;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 
@@ -47,9 +49,12 @@ class BasicExam
 
         $participant = Participant::find($participant->getAttribute('id'));
 
-        return redirect()->route('participant.exams.process', [
+        RecapService::init($participant);
+
+        return redirect()->route('participant.exams.section', [
             'participant' => $participant->uuid,
-            'answer' => $this->firstQuestion($participant)->uuid
+            'answer' => $this->firstQuestion($participant)->uuid,
+            'section' => $this->currentSection($participant)->uuid,
         ]);
     }
 
@@ -102,6 +107,16 @@ class BasicExam
         if (!empty($participant->finish_at)) {
             return false;
         }
+
+        return true;
+    }
+
+    public function markAsFinish(Participant $participant, Carbon $time)
+    {
+        RecapService::create($participant);
+
+        $participant->finish_at = $time;
+        $participant->save();
 
         return true;
     }

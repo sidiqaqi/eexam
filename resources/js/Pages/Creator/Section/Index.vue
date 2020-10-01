@@ -24,8 +24,8 @@
 
                         <template #form>
 
-                            <div class="col-span-8 sm:col-span-8">
-                                <draggable
+                            <div class="grid col-span-8 sm:col-span-8">
+                                <draggable class="mb-1"
                                     v-model="list_section"
                                     v-bind="dragOptions"
                                     group="soal"
@@ -42,7 +42,7 @@
                                                 <div class="mb-2 w-full">
                                                     <div class=" w-full grid sm:grid-cols-2 gap-4 justify-items-start">
                                                         <div class="text-gray-900 font-semibold text-lg leading-6 mb-2">
-                                                            {{ section.name }}
+                                                            <icon name="three-dots-v" class="inline" />{{ section.name }}
                                                         </div>
                                                         <div class="justify-self-end">
                                                             <inertia-link
@@ -96,21 +96,21 @@
                                                         </jet-dialog-modal>
 
                                                     </div>
-                                                    <p class="text-gray-700 text-base">
-                                                        <span>Nilai per soal : {{ section.score_per_question }}</span> |
-                                                        <span>Passing grade : {{ section.passing_grade }}</span>
-                                                    </p>
+                                                    <div class="flex text-gray-700 text-base">
+                                                        <div class="inline-flex" v-if="config.score_status === 2">Nilai per soal : {{ section.score_per_question }}</div>
+                                                        <div class="inline-flex" v-if="config.passing_grade_status === 2">| Passing grade : {{ section.passing_grade }}</div>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
                                     </transition-group>
                                 </draggable>
 
-                                <div class="max-w-sm w-full lg:max-w-full lg:flex my-2" no-body>
-                                    <div class="mb-2  w-full">
+                                <div class="max-w-sm w-full lg:max-w-full lg:flex" no-body>
+                                    <div class="flex mb-2 w-full">
                                         <inertia-link
                                             :href="'/creator/sections/' + exam.uuid + '/create'"
-                                            class="max-w w-full border border-gray-400 lg:border-gray-400 bg-white rounded-b rounded p-4 lg:flex text-gray-900 font-semibold text-lg leading-6 mb-2 hover:bg-gray-50 cursor-pointer"
+                                            class="w-full border bg-gray-50 border-gray-400 lg:border-gray-400 bg-white rounded-b rounded p-4 lg:flex text-gray-900 font-semibold text-lg mb-2 hover:bg-gray-100 cursor-pointer"
                                         >
                                             <icon class="inline" name="plus"/>
                                             Tambah sesi baru
@@ -132,7 +132,7 @@
 </template>
 
 <script>
-import Layout from "@/Layouts/Creator";
+import Layout from "@/Layouts/AppLayout";
 import Icon from "@/Shared/Icon";
 import Draggable from "vuedraggable";
 import JetFormSection from "@/Jetstream/FormSection";
@@ -154,7 +154,8 @@ export default {
     },
     props: {
         exam: Object,
-        sections: Array
+        sections: Array,
+        config: Object,
     },
     data() {
         return {

@@ -36,7 +36,7 @@
 </template>
 
 <script>
-import Layout from "@/Layouts/Participant"
+import Layout from "@/Layouts/AppLayout";
 import JetLabel from "@/Jetstream/Label";
 import JetInput from "@/Jetstream/Input";
 import JetInputError from "@/Jetstream/InputError";
@@ -65,22 +65,3 @@ export default {
     }
 };
 </script>
-
-<style scoped>
-.section-title {
-    cursor: pointer;
-}
-
-.flip-list-move {
-    transition: transform 0.5s;
-}
-
-.no-move {
-    transition: transform 0s;
-}
-
-.ghost {
-    opacity: 0.5;
-    background: #c8ebfb;
-}
-</style>>

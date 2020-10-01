@@ -4,6 +4,9 @@ namespace App\Http\Requests\Creator\Question;
 
 use App\Enums\CorrectStatus;
 use App\Enums\InputType;
+use App\Enums\PassingGradeStatus;
+use App\Enums\ScoreStatus;
+use App\Models\Config;
 use App\Rules\CorrectValue;
 use App\Models\Section;
 use Illuminate\Foundation\Http\FormRequest;
@@ -16,6 +19,8 @@ use Illuminate\Validation\Rule;
  * @property mixed question_type
  * @property mixed question_image
  * @property mixed options
+ * @property mixed section
+ * @property mixed score
  */
 class StoreRequest extends FormRequest
 {
@@ -37,6 +42,12 @@ class StoreRequest extends FormRequest
     public function rules()
     {
         return [
+            'score' => [
+                'required',
+                'numeric',
+                'min:1',
+                'max:1000',
+            ],
             'question_title' => [
                 'required',
                 'min:1',
@@ -106,6 +117,7 @@ class StoreRequest extends FormRequest
     public function dataQuestion(Section $section)
     {
         return [
+            'score' => $this->score,
             'title' => $this->question_title,
             'value' => $this->question_value,
             'type' => $this->question_type,
@@ -122,5 +134,21 @@ class StoreRequest extends FormRequest
     public function dataOptions()
     {
         return $this->options;
+    }
+
+    /**
+     * Prepare the data for validation.
+     *
+     * @return void
+     */
+    protected function prepareForValidation()
+    {
+        $config = Config::query()->where('exam_id', $this->section->exam_id)->first();
+
+        if ($config->score_status !== ScoreStatus::Question) {
+            $this->merge([
+                'score' => 10,
+            ]);
+        }
     }
 }

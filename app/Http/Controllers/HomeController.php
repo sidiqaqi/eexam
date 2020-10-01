@@ -28,6 +28,22 @@ class HomeController extends Controller
     }
 
     /**
+     * @return \Inertia\Response
+     */
+    public function creator()
+    {
+        return Inertia::render('Creator/Menu');
+    }
+
+    /**
+     * @return \Inertia\Response
+     */
+    public function participant()
+    {
+        return Inertia::render('Participant/Menu');
+    }
+
+    /**
      * Show the application pauli.
      *
      * @return \Inertia\Response

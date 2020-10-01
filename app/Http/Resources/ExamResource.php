@@ -18,6 +18,7 @@ class ExamResource extends JsonResource
             'uuid' => $this->uuid,
             'name' => $this->name,
             'description' => $this->description,
+            'code' => $this->code,
             'status' => $this->status,
         ];
     }

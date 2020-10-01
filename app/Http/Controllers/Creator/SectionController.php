@@ -22,6 +22,7 @@ class SectionController extends Controller
     {
         return Inertia::render('Creator/Section/Index', [
             'exam' => $exam,
+            'config' => $exam->config,
             'sections' => $exam->sections,
         ]);
     }

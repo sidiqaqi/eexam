@@ -27,75 +27,86 @@
                         <icon name="search"/>
                     </div>
                 </div>
-                <div class="grid gap-4 justify-items-stretch my-3 overflow-x-auto">
-                    <table class="table-auto border-collapse border-2 border-gray-300">
+                <div class="grid gap-4 justify-items-stretch my-3">
+                    <table class="table-auto border-collapse border border-gray-300">
                         <thead>
-                        <tr class="bg-white border-2 border-gray-300">
-                            <th class="w-2/10 py-3">Nama</th>
-                            <th class="w-4/10 py-3">Deskripsi</th>
-                            <th class="w-1/10 py-3">Status</th>
-                            <th class="w-3/10 py-3">Aksi</th>
+                        <tr class="bg-white border border-gray-300">
+                            <th class="py-3">Nama</th>
+                            <th class="py-3">Deskripsi</th>
+                            <th class="py-3">Kode</th>
+                            <th class="py-3">Status</th>
+                            <th class="py-3">Aksi</th>
                         </tr>
                         </thead>
                         <tbody>
                         <tr v-for="exam in exams.data" :key="exam.uuid">
                             <td class="align-middle border px-4 py-2">{{ exam.name }}</td>
-                            <td class="align-middle overflow-hidden border px-4 py-2">{{ exam.description }}</td>
+                            <td class="align-middle border px-4 py-2">{{ exam.description }}</td>
+                            <td class="border px-4 text-center py-2">{{ exam.code }}</td>
                             <td class="border px-4 text-center py-2">{{ exam.status }}</td>
                             <td class="align-middle border px-4 py-2">
-                                <div class="d-flex">
-                                    <inertia-link
-                                        :href="'/creator/exams/'+exam.uuid+'/edit'"
-                                        class="ml-1 inline-flex items-center justify-center px-2 py-1 border border-transparent rounded-md bg-white hover:bg-gray-300"
-                                    >
-                                        <icon class="inline" name="pencil"/>
-                                        Edit
-                                    </inertia-link>
-                                    <inertia-link
-                                        :href="'/creator/sections/' + exam.uuid"
-                                        class="ml-1 inline-flex items-center justify-center px-2 py-1 border border-transparent rounded-md bg-white hover:bg-gray-300"
-                                    >
-                                        <icon class="inline" name="list-task"/>
-                                        Sesi & Soal
-                                    </inertia-link>
-                                    <button
-                                        align-self="end"
-                                        class="ml-1 inline-flex items-center justify-center px-2 py-1 bg-red-600 border border-transparent rounded-md text-white hover:bg-red-500 transition ease-in-out duration-150"
-                                        variant="outline-secondary"
-                                        @click="confirmingDelete = exam.uuid"
-                                    >
-                                        <icon class="inline" name="trash"/>
-                                        Hapus
-                                    </button>
-                                    <jet-dialog-modal :show="confirmingDelete === exam.uuid"
-                                                      @close="confirmingDelete = false">
-                                        <template #title>
-                                            Hapus Ujian
-                                        </template>
+                                <jet-dropdown class="my-auto">
+                                    <template #trigger>
+                                        <button class="flex text-sm border-2 border-transparent rounded-full focus:outline-none focus:border-gray-300 transition duration-150 ease-in-out">
+                                            <icon name="three-dots-v" class="inline"/>
+                                        </button>
+                                    </template>
 
-                                        <template #content>
-                                            <small class="text-danger">
-                                                <strong>Peringatan!</strong> menghapus ujian akan menghapus semua detail
-                                                tentang
-                                                soal & hasil rekap ujian
-                                            </small>
-                                        </template>
+                                    <template #content>
 
-                                        <template #footer>
-                                            <jet-secondary-button @click.native="confirmingDelete = false">
-                                                Batalkan
-                                            </jet-secondary-button>
+                                        <inertia-link
+                                            :href="'/creator/exams/'+exam.uuid+'/edit'"
+                                            class="block mx-1 items-center justify-center px-2 py-1 my-1 border border-transparent rounded-md bg-white hover:bg-gray-300"
+                                        >
+                                            <icon class="inline" name="pencil"/>
+                                            Edit
+                                        </inertia-link>
+                                        <inertia-link
+                                            :href="'/creator/sections/' + exam.uuid"
+                                            class="block mx-1 items-center justify-center px-2 py-1 my-1 border border-transparent rounded-md bg-white hover:bg-gray-300"
+                                        >
+                                            <icon class="inline" name="list-task"/>
+                                            Sesi & Soal
+                                        </inertia-link>
+                                        <a
+                                            align-self="end"
+                                            class="block mx-1 items-center justify-center px-2 py-1 my-1 bg-red-600 border border-transparent rounded-md text-white hover:bg-red-500 transition ease-in-out duration-150"
+                                            variant="outline-secondary"
+                                            @click="confirmingDelete = exam.uuid"
+                                        >
+                                            <icon class="inline" name="trash"/>
+                                            Hapus
+                                        </a>
+                                    </template>
+                                </jet-dropdown>
+                                <jet-dialog-modal :show="confirmingDelete === exam.uuid"
+                                                  @close="confirmingDelete = false">
+                                    <template #title>
+                                        Hapus Ujian
+                                    </template>
 
-                                            <button
-                                                :class="{ 'opacity-25': form.processing }"
-                                                :disabled="form.processing"
-                                                class="ml-2 inline-flex items-center justify-center px-4 py-2 bg-red-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-red-500 focus:outline-none focus:border-red-700 focus:shadow-outline-red active:bg-red-600 transition ease-in-out duration-150"
-                                                @click.prevent="deleteExam(exam.uuid)">
-                                                Hapus
-                                            </button>
-                                        </template>
-                                    </jet-dialog-modal>
-                                </div>
+                                    <template #content>
+                                        <small class="text-danger">
+                                            <strong>Peringatan!</strong> menghapus ujian akan menghapus semua detail
+                                            tentang
+                                            soal & hasil rekap ujian
+                                        </small>
+                                    </template>
+
+                                    <template #footer>
+                                        <jet-secondary-button @click.native="confirmingDelete = false">
+                                            Batalkan
+                                        </jet-secondary-button>
+
+                                        <button
+                                            :class="{ 'opacity-25': form.processing }"
+                                            :disabled="form.processing"
+                                            class="ml-2 inline-flex items-center justify-center px-4 py-2 bg-red-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-red-500 focus:outline-none focus:border-red-700 focus:shadow-outline-red active:bg-red-600 transition ease-in-out duration-150"
+                                            @click.prevent="deleteExam(exam.uuid)">
+                                            Hapus
+                                        </button>
+                                    </template>
+                                </jet-dialog-modal>
                             </td>
                         </tr>
                         <tr v-if="!exams.meta.total">
@@ -111,7 +122,7 @@
 </template>
 
 <script>
-import Layout from "@/Layouts/Creator"
+import Layout from "@/Layouts/AppLayout"
 import Icon from "@/Shared/Icon"
 import pickBy from 'lodash/pickBy'
 import throttle from 'lodash/throttle'
@@ -119,6 +130,8 @@ import JetDialogModal from '@/Jetstream/DialogModal'
 import JetDangerButton from '@/Jetstream/DangerButton'
 import JetSecondaryButton from '@/Jetstream/SecondaryButton'
 import Pagination from "@/Shared/Pagination";
+import JetDropdown from "@/Jetstream/Dropdown";
+
 
 export default {
     props: {
@@ -131,6 +144,7 @@ export default {
         JetDialogModal,
         JetDangerButton,
         JetSecondaryButton,
+        JetDropdown,
         Pagination,
     },
     data() {

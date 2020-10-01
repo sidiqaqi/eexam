@@ -31,8 +31,9 @@
 
                         <template #form>
 
-                            <div class="col-span-8 sm:col-span-8">
+                            <div class="grid col-span-8 sm:col-span-8">
                                 <draggable
+                                    class="mb-1"
                                     v-model="list_question"
                                     v-bind="dragOptions"
                                     group="soal"
@@ -49,7 +50,7 @@
                                                 <div class="w-full">
                                                     <div class=" w-full grid sm:grid-cols-2 gap-4 justify-items-start">
                                                         <div class="text-gray-900 font-semibold text-lg leading-6 mb-2">
-                                                            {{ question.title }}
+                                                            <icon name="three-dots-v" class="inline" /> {{ question.title }}
                                                         </div>
                                                         <div class="justify-self-end">
                                                             <inertia-link
@@ -102,11 +103,11 @@
                                     </transition-group>
                                 </draggable>
 
-                                <div class="max-w-sm w-full lg:max-w-full lg:flex my-2" no-body>
-                                    <div class="mb-2  w-full">
+                                <div class="max-w-sm w-full lg:max-w-full lg:flex" no-body>
+                                    <div class="flex mb-2 w-full">
                                         <inertia-link
                                             :href="'/creator/questions/' + section.uuid + '/create'"
-                                            class="max-w w-full border border-gray-400 lg:border-gray-400 bg-white rounded-b rounded p-4 lg:flex text-gray-900 font-semibold text-lg leading-6 mb-2 hover:bg-gray-50 cursor-pointer"
+                                            class="w-full bg-gray-50 border border-gray-400 lg:border-gray-400 bg-white rounded-b rounded p-4 lg:flex text-gray-900 font-semibold text-lg mb-2 hover:bg-gray-100 cursor-pointer"
                                         >
                                             <icon class="inline" name="plus"/>
                                             Tambah Soal baru
@@ -128,7 +129,7 @@
 </template>
 
 <script>
-import Layout from "@/Layouts/Creator";
+import Layout from "@/Layouts/AppLayout";
 import Icon from "@/Shared/Icon";
 import Draggable from "vuedraggable";
 import JetFormSection from "@/Jetstream/FormSection";

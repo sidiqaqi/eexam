@@ -24,6 +24,7 @@ class CreateQuestionsTable extends Migration
             $table->string('image')->nullable();
             $table->unsignedInteger('order');
             $table->unsignedInteger('time_limit')->nullable();
+            $table->unsignedInteger('score')->nullable();
             $table->timestamps();
 
             $table->foreign('section_id')

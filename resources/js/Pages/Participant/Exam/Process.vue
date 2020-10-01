@@ -1,93 +1,111 @@
 <template>
     <layout :title="'Proses Ujian - ' + $page.app.name" active="participant.exams.form">
-        <div class="row">
-            <div class="col-md-9">
-                <p>{{ exam.data.name }} - {{ section.name }}
-                    <button class="btn p-0" title="instruksi" v-b-modal="'instruction-' + section.uuid"><icon name="question" /></button>
-                </p>
-                <b-modal :id="'instruction-' + section.uuid" hide-backdrop :title="section.name">
-                    <b class="mb-3">Instruksi:</b>
-                    <vue-markdown
-                        :breaks="markdown.breaks"
-                        :emoji="markdown.emoji"
-                        :html="markdown.html"
-                        :linkify="markdown.linkify"
-                        :show="markdown.show"
-                        :source="section.instruction"
-                        :toc="markdown.toc"
-                        :typographer="markdown.typographer"
-                        :watches="['markdown.show','markdown.html','markdown.breaks','markdown.linkify','markdown.emoji','markdown.typographer','markdown.toc']"
-                        class="result-html full-height"
-                        toc-id="toc"
-                    ></vue-markdown>
-                    <template v-slot:modal-footer>
-                        <div class="w-100">
-                            <b-button
-                                variant="outline-secondary"
-                                size="sm"
-                                class="float-right mr-1"
-                                @click="$bvModal.hide('instruction-' + section.uuid)"
-                            >Tutup</b-button>
-                        </div>
-                    </template>
-                </b-modal>
 
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-md-9">
-                <b> Pertanyaan. {{ questionNumber }} </b>
-                <b-card class="col-auto mb-2 mt-3" v-if="question">
-                    <vue-markdown
-                        :breaks="markdown.breaks"
-                        :emoji="markdown.emoji"
-                        :html="markdown.html"
-                        :linkify="markdown.linkify"
-                        :show="markdown.show"
-                        :source="question.value"
-                        :toc="markdown.toc"
-                        :typographer="markdown.typographer"
-                        :watches="['markdown.show','markdown.html','markdown.breaks','markdown.linkify','markdown.emoji','markdown.typographer','markdown.toc']"
-                        class="result-html full-height"
-                        toc-id="toc"
-                    ></vue-markdown>
-                    <div class="mb-3" v-if="question.type == 2">
-                        <img :src="question.image" @error="imgError" alt="preview" class="img-fluid border"/>
+        <template v-slot:header>
+            <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+                Proses Ujian: {{ exam.data.name }}
+            </h2>
+
+            <vue-countdown v-if="config.data.time_mode === 2" :time="time_limit" tag="p" @end="forceFinish">
+                <template
+                    slot-scope="props"
+                >Time Remaining：{{ props.minutes }} minutes, {{ props.seconds }} seconds.</template>
+            </vue-countdown>
+        </template>
+
+        <div>
+            <div class="grid max-w-7xl mx-auto py-10 sm:px-6 lg:px-8">
+                <div class="w-full bg-white p-5">
+                    <div class="grid grid-cols-3 gap-4">
+                        <div class="col-span-3 md:col-span-2">
+                            <span class="font-semibold text-lg text-gray-800 leading-tight">Sesi: {{
+                                section.data.name
+                            }}</span>
+                        </div>
+                        <div class="col-span-3 md:col-span-1 justify-self-start md:justify-self-end">
+                            <sup class="cursor-pointer" @click="openInstruction = true">
+                                instruksi&nbsp;<icon class="inline" name="question"/>
+                            </sup>
+                        </div>
+                        <jet-dialog-modal :show="openInstruction" @close="openInstruction = false">
+                            <template #title>
+                                Instruksi
+                            </template>
+
+                            <template #content>
+                                <div class="prose" v-html="compiledInstructionMarkdown"></div>
+                            </template>
+
+                            <template #footer>
+                                <jet-secondary-button
+                                    @click.native="openInstruction = false">
+                                    Tutup
+                                </jet-secondary-button>
+                            </template>
+                        </jet-dialog-modal>
                     </div>
-                </b-card>
-                <label :key="key" class="col-12" v-for="(option, key) in options.data">
-                    <b-card>
-                        <input :value="option.uuid" name="answer" v-model="form.option" type="radio"/>
-                        <span>{{ alpha(key) }}.</span>
-                        <img
-                            :src="option.image"
-                            @error="imgError"
-                            alt="preview"
-                            class="img-fluid border"
-                            v-if="option.type == 2"
-                        />
-                        <span v-else>{{ option.value }}</span>
-                    </b-card>
-                </label>
-                <div class="row pt-5">
-                    <div class="col-12">
-                        <button v-if="questionNumber === 1" class="btn btn-outline-secondary float-left" @click="prev">kembali</button>
-                        <button class="btn btn-outline-secondary float-right" @click="saveNext">Simpan dan Lanjut</button>
+                    <div class="grid grid-cols-3 gap-4">
+                        <div class="col-span-3 md:col-span-2 py-3 my-3">
+                            <b> Pertanyaan. {{ questionNumber }} </b>
+                            <div v-if="question" class="col-auto mt-3 border p-3 mb-5">
+                                <div class="prose" v-html="compiledQuestionMarkdown"></div>
+                                <div v-if="question.type == 2" class="mb-3">
+                                    <img :src="question.image" alt="preview" class="img-fluid border" @error="imgError"/>
+                                </div>
+                            </div>
+                            <div v-for="(option, key) in options.data" :key="key" class="cursor-pointer my-3"
+                                 @click.prevent="selectOption(option.uuid)">
+                                <div>
+                                    <icon v-if="form.option == option.uuid" class="inline" name="circle-checked"/>
+                                    <icon v-else class="inline" name="circle"/>
+                                    <span>{{ alpha(key) }}.</span>
+                                    <img
+                                        v-if="option.type == 2"
+                                        :src="option.image"
+                                        alt="preview"
+                                        class="img-fluid border"
+                                        @error="imgError"
+                                    />
+                                    <span v-else>{{ option.value }}</span>
+                                </div>
+                            </div>
+                            <div class="row pt-5">
+                                <div class="col-12">
+                                    <jet-secondary-button v-if="questionNumber !== 1" class="btn btn-outline-secondary float-left"
+                                            @click.native="prev">kembali
+                                    </jet-secondary-button>
+                                    <div class="float-right">
+                                        <div v-if="cantSave" class="text-red-500 mb-2">
+                                            mohon memilih jawaban terlebih dahulu.
+                                        </div>
+                                        <jet-button class="float-right" @click.native="saveNext">
+                                            Simpan dan Lanjut
+                                        </jet-button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-span-3 md:col-span-1 border-l-0 md:border-l p-3">
+                            <div class="row">
+                                <p><b> Indeks: </b></p>
+                                <p>Anda telah mengerjakan <b>{{ totalFilled }}</b> dari <b>{{ totalQuestion }}</b> Soal.</p>
+                            </div>
+                            <div class="row mt-3">
+                                <inertia-link
+                                    v-for="(answerItem, index) in answers.data"
+                                    :key="answerItem.uuid"
+                                    :href="'/participant/exams/process/' + participant.data.uuid + '/' + answerItem.uuid"
+                                    class="border py-2 px-4"
+                                    v-bind:class="{ 'bg-green-300' : answerItem.filled && !isActiveAnswer(answerItem.uuid) ,'bg-gray-300' : isActiveAnswer(answerItem.uuid)}">
+                                    {{ index + 1 }}
+                                </inertia-link>
+                                <inertia-link
+                                    :href="'/participant/exams/recap/' + participant.data.uuid"
+                                    class="border py-2 px-4">Selesai
+                                </inertia-link>
+                            </div>
+                        </div>
                     </div>
-                </div>
-            </div>
-            <div class="col-md-3">
-                <div class="row">
-                <b> Indeks: </b>
-                </div>
-                <div class="row mt-3">
-                <inertia-link
-                    :href="'/participant/exams/process/' + participant.data.uuid + '/' + answer.uuid"
-                    class="btn col-md-4 col-sm-8 col-8 btn-sharp" v-bind:class="{ 'btn-outline-secondary' : isActiveAnswer(answer.uuid) , 'text-success' : answer.filled }"
-                    type="submit"
-                    :key="answer.uuid"
-                    v-for="(answer, index) in answers.data">{{ index + 1 }}
-                </inertia-link>
                 </div>
             </div>
         </div>
@@ -96,19 +114,25 @@
 
 <script>
 import Layout from '@/Layouts/Exam'
-import InputText from '@/Shared/InputText'
 import Icon from '@/Shared/Icon'
+import JetButton from "@/Jetstream/Button";
 import ButtonLoading from '@/Shared/ButtonLoading'
-import VueMarkdown from 'vue-markdown'
+import JetDialogModal from "@/Jetstream/DialogModal"
+import JetSecondaryButton from "@/Jetstream/SecondaryButton"
+import marked from 'marked';
+import VueCountdown from "@chenfengyuan/vue-countdown";
 
 export default {
     components: {
         Icon,
         Layout,
-        InputText,
         ButtonLoading,
-        VueMarkdown
+        JetButton,
+        JetDialogModal,
+        JetSecondaryButton,
+        VueCountdown,
     },
+
     props: {
         answer: Object,
         answers: Object,
@@ -119,16 +143,18 @@ export default {
         question: Object,
         section: Object,
         navigation: Object,
-    },
-    mounted () {
-        this.form.option = this.answer.data.option_uuid
-    },
-
-    updated () {
-        this.form.option = this.answer.data.option_uuid
+        time_limit: Number,
     },
 
     computed: {
+        compiledInstructionMarkdown: function () {
+            return marked(this.section.data.instruction);
+        },
+
+        compiledQuestionMarkdown: function () {
+            return marked(this.question.data.value);
+        },
+
         questionNumber: function () {
             let number = 0
             let answer = this.answer.data
@@ -139,60 +165,70 @@ export default {
             })
             return number
         },
+
+        totalQuestion: function () {
+            return (this.answers.data).length;
+        },
+
+        totalFilled: function () {
+            let filled = 0;
+            (this.answers.data).forEach(function (item) {
+                if (item.filled) filled++;
+            })
+            return filled;
+        }
     },
-    data () {
+
+    data() {
         return {
-            markdown: {
-                show: true,
-                html: false,
-                breaks: true,
-                linkify: false,
-                emoji: true,
-                typographer: true,
-                toc: false
-            },
-            sending: false,
+            openInstruction: false,
+
+            cantSave: false,
+
             form: {
                 option: this.answer.data.option_uuid
             }
         }
     },
+
+    watch: {
+        question(current, old) {
+            if (current.data.uuid === old.data.uuid) return;
+
+            this.form.option = this.answer.data.option_uuid;
+
+            this.cantSave = false;
+        }
+    },
+
     methods: {
         isActiveAnswer(answerUUID) {
             return answerUUID === this.answer.data.uuid
         },
-        alpha (key) {
+
+        alpha(key) {
             return String.fromCharCode('A'.charCodeAt() + key)
         },
+
         prev() {
             this.$inertia.post('/participant/exams/previous/' + this.participant.data.uuid + '/' + this.answer.data.uuid)
         },
-        saveNext () {
-            this.$inertia.post('/participant/exams/submit/' + this.participant.data.uuid + '/' + this.answer.data.uuid + '/' + this.form.option)
+
+        selectOption(uuid) {
+            this.form.option = uuid
+        },
+
+        saveNext() {
+            if (this.form.option) {
+                this.$inertia.post('/participant/exams/submit/' + this.participant.data.uuid + '/' + this.answer.data.uuid + '/' + this.form.option)
+            } else {
+                this.cantSave = true
+            }
+        },
+
+        forceFinish() {
+            this.$inertia.post('/participant/exams/finish/' + this.participant.data.uuid)
         }
     }
 }
 </script>
-
-<style scoped>
-.section-title {
-    cursor: pointer;
-}
-
-.flip-list-move {
-    transition: transform 0.5s;
-}
-
-.no-move {
-    transition: transform 0s;
-}
-
-.ghost {
-    opacity: 0.5;
-    background: #c8ebfb;
-}
-
-.btn-sharp {
-    border-radius: 0 !important;
-}
-</style>>

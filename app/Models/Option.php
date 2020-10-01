@@ -13,6 +13,7 @@ use Ramsey\Uuid\Uuid;
  * @method static self paginate($perPage)
  * @method static create(array $data)
  * @property mixed id
+ * @property mixed correct_id
  */
 class Option extends Model
 {
