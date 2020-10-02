@@ -11,7 +11,7 @@ class Recap extends Model
 {
     use HasFactory, HasOwner;
 
-    protected $fillable = ['user_id', 'participant_id', 'exam', 'creator', 'details', 'status', 'total_score'];
+    protected $fillable = ['user_id', 'participant_id', 'exam_id', 'exam', 'creator', 'details', 'status', 'total_score'];
 
     /**
      * Setup model event hooks

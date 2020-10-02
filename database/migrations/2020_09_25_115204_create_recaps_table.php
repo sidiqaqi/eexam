@@ -18,6 +18,7 @@ class CreateRecapsTable extends Migration
             $table->uuid('uuid');
             $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('participant_id');
+            $table->unsignedBigInteger('exam_id');
             $table->string('exam', 150);
             $table->string('creator');
             $table->text('details')->nullable();

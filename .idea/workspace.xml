@@ -2,72 +2,23 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="f5ae4a9d-4b12-4d97-b582-355f7df0cf15" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/app/Http/Controllers/Creator/ResultController.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/Services/PublishExamService.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/Services/RecapService.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/js/Pages/Creator/Menu.vue" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/js/Pages/Participant/Exam/Recap.vue" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/js/Pages/Participant/Menu.vue" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/js/Shared/ErrorMessages.vue" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/js/Shared/Welcome.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/js/Pages/Creator/Result/Exam.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/js/Pages/Creator/Result/Index.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/js/Pages/Creator/Result/Participant.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.env.example" beforeDir="false" afterPath="$PROJECT_DIR$/.env.example" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Enums/ResultStatus.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Enums/ResultStatus.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Enums/TimeMode.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Enums/TimeMode.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Creator/ExamController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Creator/ExamController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Creator/SectionController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Creator/SectionController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/HomeController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/HomeController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Participant/ExamController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Participant/ExamController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Participant/ResultController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Participant/ResultController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Requests/Creator/Config/UpdateRequest.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Requests/Creator/Config/UpdateRequest.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Requests/Creator/Question/StoreRequest.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Requests/Creator/Question/StoreRequest.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Requests/Creator/Question/UpdateRequest.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Requests/Creator/Question/UpdateRequest.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Requests/Creator/Section/StoreRequest.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Requests/Creator/Section/StoreRequest.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Requests/Creator/Section/UpdateRequest.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Requests/Creator/Section/UpdateRequest.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Resources/ConfigResource.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Resources/ConfigResource.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Resources/ExamResource.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Resources/ExamResource.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Models/Answer.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Models/Answer.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Models/Config.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Models/Config.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Creator/ResultController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Creator/ResultController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Models/Exam.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Models/Exam.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Models/Option.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Models/Option.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Models/Participant.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Models/Participant.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Models/Question.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Models/Question.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Services/ConfigService.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Services/ConfigService.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Services/Exams/BasicExam.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Services/Exams/BasicExam.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Services/Exams/TimeLimitExam.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Services/Exams/TimeLimitExam.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Services/ParticipantService.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Services/ParticipantService.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Traits/HasOwner.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Traits/HasOwner.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/migrations/2020_02_17_131036_create_configs_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2020_02_17_131036_create_configs_table.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/migrations/2020_02_17_131116_create_questions_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2020_02_17_131116_create_questions_table.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/migrations/2020_02_17_131221_create_participants_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2020_02_17_131221_create_participants_table.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/migrations/2020_02_17_131242_create_answers_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2020_02_17_131242_create_answers_table.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Models/Recap.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Models/Recap.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Services/RecapService.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Services/RecapService.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/migrations/2020_09_25_115204_create_recaps_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2020_09_25_115204_create_recaps_table.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/public/css/app.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/css/app.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/public/js/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/js/app.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/public/js/manifest.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/js/manifest.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/public/js/vendor.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/js/vendor.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/public/mix-manifest.json" beforeDir="false" afterPath="$PROJECT_DIR$/public/mix-manifest.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/js/Layouts/AppLayout.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/Layouts/AppLayout.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/js/Layouts/Creator.vue" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/js/Layouts/Participant.vue" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/js/Pages/Creator/Exam/Create.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/Pages/Creator/Exam/Create.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/js/Pages/Creator/Exam/Edit.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/Pages/Creator/Exam/Edit.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/js/Pages/Creator/Exam/EditConfig.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/Pages/Creator/Exam/EditConfig.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/js/Pages/Creator/Exam/Index.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/Pages/Creator/Exam/Index.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/js/Pages/Creator/Question/Create.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/Pages/Creator/Question/Create.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/js/Pages/Creator/Question/Edit.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/Pages/Creator/Question/Edit.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/js/Pages/Creator/Question/Index.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/Pages/Creator/Question/Index.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/js/Pages/Creator/Section/Create.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/Pages/Creator/Section/Create.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/js/Pages/Creator/Section/Edit.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/Pages/Creator/Section/Edit.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/js/Pages/Creator/Section/Index.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/Pages/Creator/Section/Index.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/js/Pages/Dashboard.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/Pages/Dashboard.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/js/Pages/Participant/Exam/Details.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/Pages/Participant/Exam/Details.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/js/Pages/Participant/Exam/Form.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/Pages/Participant/Exam/Form.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/js/Pages/Participant/Exam/Process.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/Pages/Participant/Exam/Process.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/js/Pages/Participant/Exam/Section.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/Pages/Participant/Exam/Section.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/js/Pages/Participant/Result/Index.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/Pages/Participant/Result/Index.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/js/Shared/Icon.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/Shared/Icon.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/lang/id/enums.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/lang/id/enums.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/lang/id/validation.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/lang/id/validation.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/js/Pages/Creator/Menu.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/Pages/Creator/Menu.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -223,21 +174,21 @@
     <property name="ASKED_SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../pingcrm" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/resources/js/Pages/Creator" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="ts.external.directory.path" value="C:\Program Files\JetBrains\PhpStorm 2019.2\plugins\JavaScriptLanguage\jsLanguageServicesImpl\external" />
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
   <component name="RecentsManager">
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="C:\laragon\www\eexam\resources\js\Pages\Creator\Exam" />
-    </key>
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\laragon\www\eexam\resources\js\Pages\Creator" />
       <recent name="C:\laragon\www\eexam\resources\js\Pages" />
       <recent name="C:\laragon\www\eexam\public" />
-      <recent name="C:\laragon\www\eexam\resources\js\Pages\Creator" />
       <recent name="C:\laragon\www\eexam\app\Rules" />
       <recent name="C:\laragon\www\eexam\resources\js\Shared" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\laragon\www\eexam\resources\js\Pages\Creator\Exam" />
     </key>
   </component>
   <component name="RunManager">
@@ -268,7 +219,7 @@
       <workItem from="1601018380103" duration="7735000" />
       <workItem from="1601027089768" duration="20772000" />
       <workItem from="1601091994875" duration="16820000" />
-      <workItem from="1601538303727" duration="7130000" />
+      <workItem from="1601538303727" duration="21009000" />
     </task>
     <servers />
   </component>
@@ -280,10 +231,10 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="637" y="239" key="#com.intellij.openapi.updateSettings.impl.PluginUpdateInfoDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1601013125881" />
-    <state x="624" y="214" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog" timestamp="1601543728637">
+    <state x="624" y="214" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog" timestamp="1601602518766">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="624" y="214" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1601543728637" />
+    <state x="624" y="214" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1601602518766" />
     <state x="687" y="214" key="FileChooserDialogImpl" timestamp="1601179491236">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -292,10 +243,10 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state width="623" height="498" key="SwitcherDM/0.0.1920.1040@0.0.1920.1040" timestamp="1600839403688" />
-    <state x="602" y="186" width="716" height="740" key="find.popup" timestamp="1601542683550">
+    <state x="602" y="186" width="716" height="740" key="find.popup" timestamp="1601627207130">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="602" y="186" width="716" height="740" key="find.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1601542683550" />
+    <state x="602" y="186" width="716" height="740" key="find.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1601627207130" />
     <state x="539" y="5" width="840" height="1034" key="search.everywhere.popup" timestamp="1601131893217">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>

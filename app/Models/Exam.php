@@ -23,6 +23,7 @@ use Ramsey\Uuid\Uuid;
  * @property mixed name
  * @property mixed description
  * @property mixed user
+ * @property mixed participants
  */
 class Exam extends Model
 {

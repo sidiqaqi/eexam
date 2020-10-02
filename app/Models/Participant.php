@@ -16,6 +16,7 @@ use Ramsey\Uuid\Uuid;
  * @property mixed user_id
  * @property false|mixed|string cache_config
  * @property mixed recap
+ * @property mixed exam_id
  * @method static find(\Illuminate\Database\Eloquent\HigherOrderBuilderProxy $id)
  * @method static owner(int|string|null $id)
  */

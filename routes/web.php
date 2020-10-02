@@ -46,6 +46,11 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function() {
             Route::post('/{question}/order', 'App\Http\Controllers\Creator\QuestionController@order')->name('questions.order');
             Route::delete('/{question}', 'App\Http\Controllers\Creator\QuestionController@destroy')->name('questions.destroy');
         });
+        Route::prefix('/results')->group(function () {
+            Route::get('/', 'App\Http\Controllers\Creator\ResultController@index')->name('results.index');
+            Route::get('/{exam}', 'App\Http\Controllers\Creator\ResultController@exam')->name('results.exam');
+            Route::get('/details/{participant}', 'App\Http\Controllers\Creator\ResultController@details')->name('results.participant');
+        });
     });
 
     Route::prefix('participant')->name('participant.')->group(function () {

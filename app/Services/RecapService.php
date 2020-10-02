@@ -23,6 +23,7 @@ class RecapService
                 'user_id' => $participant->user_id,
                 'participant_id' => $participant->id,
             ], [
+                'exam_id' => $exam->id,
                 'exam' => $exam->name,
                 'creator' => $exam->user->name ?? 'Anon',
             ]);
@@ -58,7 +59,7 @@ class RecapService
             'total_score' => $recap['result']['total_score'] ?? 0,
         ]);
 
-        return Recap::query()->find($recap->id);
+        return Recap::query()->find($recap->getAttribute('id'));
     }
 
     public static function exam(Exam $exam)
@@ -228,7 +229,7 @@ class RecapService
             if ($participantRecap->status == RecapResultStatus::Passed) {
                 $rank = Recap::query()->select('user_id', 'total_score')
                     ->where('status', RecapResultStatus::Passed)
-                    ->where('participant_id', $participant->id)
+                    ->where('exam_id', $participant->exam_id)
                     ->where('total_score', '>' , $participantRecap->total_score)
                 ->distinct('total_score')
                 ->count();
@@ -237,14 +238,14 @@ class RecapService
 
             } else {
                 $topRank = Recap::query()->select('user_id', 'total_score')
-                    ->where('participant_id', $participant->id)
+                    ->where('exam_id', $participant->exam_id)
                     ->where('status', RecapResultStatus::Passed)
                     ->distinct('total_score')
                     ->count();
 
                 $rank = Recap::query()->select('user_id', 'total_score')
                     ->where('status', RecapResultStatus::Failed)
-                    ->where('participant_id', $participant->id)
+                    ->where('exam_id', $participant->exam_id)
                     ->where('total_score', '>' , $participantRecap->total_score)
                     ->where('id' , '<>' , $participantRecap->id)
                     ->distinct('total_score')
@@ -253,7 +254,7 @@ class RecapService
                 $report->rank = $rank + $topRank;
 
             }
-            $report->rank_from = Recap::query()->where('participant_id', $participant->id)->count();
+            $report->rank_from = Recap::query()->where('exam_id', $participant->exam_id)->count();
         } else {
             $report->rank = 'N/A';
             $report->rank_from = 'N/A';
