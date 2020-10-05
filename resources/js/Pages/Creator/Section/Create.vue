@@ -102,6 +102,7 @@ import JetInput from '@/Jetstream/Input'
 import JetInputError from '@/Jetstream/InputError'
 import JetLabel from '@/Jetstream/Label'
 import JetSectionBorder from '@/Jetstream/SectionBorder'
+import Purify from 'dompurify'
 
 export default {
     components: {
@@ -121,7 +122,7 @@ export default {
     },
     computed: {
         compiledMarkdown: function () {
-            return marked(this.form.instruction);
+            return Purify.sanitize(marked(this.form.instruction));
         }
     },
     data() {

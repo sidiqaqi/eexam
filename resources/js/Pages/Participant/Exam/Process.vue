@@ -117,10 +117,11 @@ import Layout from '@/Layouts/Exam'
 import Icon from '@/Shared/Icon'
 import JetButton from "@/Jetstream/Button";
 import ButtonLoading from '@/Shared/ButtonLoading'
-import JetDialogModal from "@/Jetstream/DialogModal"
-import JetSecondaryButton from "@/Jetstream/SecondaryButton"
-import marked from 'marked';
-import VueCountdown from "@chenfengyuan/vue-countdown";
+import JetDialogModal from '@/Jetstream/DialogModal'
+import JetSecondaryButton from '@/Jetstream/SecondaryButton'
+import marked from 'marked'
+import VueCountdown from '@chenfengyuan/vue-countdown'
+import Purify from 'dompurify';
 
 export default {
     components: {
@@ -148,11 +149,11 @@ export default {
 
     computed: {
         compiledInstructionMarkdown: function () {
-            return marked(this.section.data.instruction);
+            return Purify.sanitize(marked(this.section.data.instruction));
         },
 
         compiledQuestionMarkdown: function () {
-            return marked(this.question.data.value);
+            return Purify.sanitize(marked(this.question.data.value));
         },
 
         questionNumber: function () {

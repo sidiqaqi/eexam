@@ -180,9 +180,9 @@
 </template>
 
 <script>
-import Layout from "@/Layouts/AppLayout";
-import Icon from "@/Shared/Icon";
-import marked from "marked";
+import Layout from '@/Layouts/AppLayout'
+import Icon from '@/Shared/Icon'
+import marked from 'marked'
 import JetButton from '@/Jetstream/Button'
 import JetDangerButton from '@/Jetstream/DangerButton'
 import JetFormSection from '@/Jetstream/FormSection'
@@ -190,8 +190,9 @@ import JetInput from '@/Jetstream/Input'
 import JetInputError from '@/Jetstream/InputError'
 import JetLabel from '@/Jetstream/Label'
 import JetSectionBorder from '@/Jetstream/SectionBorder'
-import InputBasicSelect from "@/Shared/InputBasicSelect";
-import JetSecondaryButton from "@/Jetstream/SecondaryButton";
+import InputBasicSelect from '@/Shared/InputBasicSelect'
+import JetSecondaryButton from '@/Jetstream/SecondaryButton'
+import Purify from 'dompurify'
 
 export default {
     components: {
@@ -242,8 +243,8 @@ export default {
         this.form.options = this.question.options;
     },
     computed: {
-        compiledMarkdown: function() {
-            return marked(this.form.question_value);
+        compiledMarkdown: function () {
+            return Purify.sanitize(marked(this.form.question_value));
         }
     },
     methods: {

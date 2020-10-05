@@ -36,7 +36,8 @@ import Layout from '@/Layouts/Exam'
 import InputText from '@/Shared/InputText'
 import ButtonLoading from '@/Shared/ButtonLoading'
 import marked from 'marked'
-import VueCountdown from "@chenfengyuan/vue-countdown"
+import VueCountdown from '@chenfengyuan/vue-countdown'
+import Purify from 'dompurify'
 
 export default {
     components: {
@@ -56,7 +57,7 @@ export default {
     },
     computed: {
         compiledMarkdown: function() {
-            return marked(this.section.data.instruction);
+            return Purify.sanitize(marked(this.section.data.instruction));
         }
     },
     data () {
