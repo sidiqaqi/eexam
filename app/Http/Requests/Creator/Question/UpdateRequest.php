@@ -54,7 +54,7 @@ class UpdateRequest extends FormRequest
             'question_value' => [
                 'required',
                 'min:10',
-                'max: 255',
+                'max:1000',
             ],
             'question_type' => [
                 'required',
