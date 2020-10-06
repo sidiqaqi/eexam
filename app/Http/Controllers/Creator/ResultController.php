@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Creator\Result\ShowExamRequest;
 use App\Http\Requests\Creator\Result\ShowParticipantRequest;
 use App\Http\Resources\ExamCreatorResultResource;
+use App\Http\Resources\ExamResource;
 use App\Http\Resources\ParticipantCreatorReportResource;
 use App\Models\Exam;
 use App\Models\Participant;
@@ -25,7 +26,7 @@ class ResultController extends Controller
         return Inertia::render('Creator/Result/Index', [
             'filters' => $request->all('search'),
             'exams' => ExamCreatorResultResource::collection(
-                Exam::select(['uuid', 'name', 'description', 'code', 'status_id'])
+                Exam::query()->select(['uuid', 'name', 'description', 'code', 'status_id'])
                     ->addSelect(['participant' => Participant::query()
                         ->selectRaw('count(id)')
                         ->whereColumn('exam_id', 'exams.id')
@@ -51,6 +52,7 @@ class ResultController extends Controller
             ->paginate();
 
         return Inertia::render('Creator/Result/Exam', [
+            'exam' => new ExamResource($exam),
             'participants' => ParticipantCreatorReportResource::collection($participants)
         ]);
 

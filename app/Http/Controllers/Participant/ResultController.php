@@ -20,8 +20,8 @@ class ResultController extends Controller
     {
         return Inertia::render('Participant/Result/Index', [
             'participants' => ParticipantReportResource::collection(
-                Participant::owner(User::find(Auth::id()))
-                    ->with('recap')
+                Participant::query()->owner(User::find(Auth::id()))
+                    ->with(['recap.examModel'])
                     ->paginate()
             )
         ]);

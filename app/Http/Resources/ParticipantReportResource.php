@@ -2,6 +2,7 @@
 
 namespace App\Http\Resources;
 
+use App\Models\Exam;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 /**
@@ -22,6 +23,8 @@ class ParticipantReportResource extends JsonResource
         return [
             'uuid' => $this->uuid,
             'exam' => $this->recap->exam ?? '-',
+            'exam_uuid' => $this->recap->examModel->uuid ?? null,
+            'participant_uuid' => $this->recap->participant->uuid ?? null,
             'creator' => $this->recap->creator ?? '-',
             'on_going' => $this->finish_at ? 0 : 1,
         ];

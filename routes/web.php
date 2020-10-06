@@ -60,6 +60,7 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function() {
             Route::post('details', 'App\Http\Controllers\Participant\ExamController@details')->name('exams.details.post');
             Route::get('details/{code}', 'App\Http\Controllers\Participant\ExamController@show')->name('exams.details.show');
             Route::post('join/{exam}', 'App\Http\Controllers\Participant\ExamController@join')->name('exams.join');
+            Route::get('continue/{participant}/{exam}', 'App\Http\Controllers\Participant\ExamController@continue')->name('exams.continue');
             Route::get('section/{participant}/{answer}/{section}', 'App\Http\Controllers\Participant\ExamController@section')->name('exams.section');
             Route::get('process/{participant}/{answer}', 'App\Http\Controllers\Participant\ExamController@process')->name('exams.process');
             Route::post('submit/{participant}/{answer}/{option}', 'App\Http\Controllers\Participant\ExamController@submit')->name('exams.submit.post');

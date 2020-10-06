@@ -32,7 +32,8 @@
                             </td>
                             <td class="align-middle border px-4 py-2">
                                 <inertia-link v-if="!participant.on_going" class="underline" :href="'/participant/results/' + participant.uuid "> lihat hasil </inertia-link>
-                                <span v-else>-</span>
+                                <inertia-link v-else-if="participant.exam_uuid" class="underline" :href="'/participant/exams/continue/' + participant.uuid + '/' + participant.exam_uuid"> lanjut ujian </inertia-link>
+                                <p v-else class="underline"> ujian tidak tersedia </p>
                             </td>
                         </tr>
                         <tr v-if="!participants.meta.total">

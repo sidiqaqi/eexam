@@ -33,16 +33,7 @@
                                             <div class="mt-2 text-sm text-gray-500">
                                                 Membuat ujian baru dari awal. Semua pengaturan akan ditetapkan secara default. Anda dapat menggantinya sewaktu-waktu.
                                             </div>
-                                            <inertia-link :href="'/creator/exams/create'">
-                                                <div class="mt-3 flex items-center text-sm font-semibold text-indigo-700">
-                                                    <div>
-                                                        Lanjut membuat ujian
-                                                    </div>
-                                                    <div class="ml-1 text-indigo-500">
-                                                        <svg viewBox="0 0 20 20" fill="currentColor" class="arrow-right w-4 h-4"><path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
-                                                    </div>
-                                                </div>
-                                            </inertia-link>
+                                            <link-arrow href="/creator/exams/create">Lanjut membuat ujian</link-arrow>
                                         </div>
                                     </div>
                                 </div>
@@ -62,14 +53,7 @@
                                             <div class="mt-2 text-sm text-gray-500">
                                                 Daftar ujian yang telah anda buat. Anda juga dapat melakukan duplikat ujian yang sudah ada untuk memudahkan membuat soal dengan soal-soal yang ada pada ujian sebelumnya.
                                             </div>
-                                            <inertia-link :href="'/creator/exams'">
-                                                <div class="mt-3 flex items-center text-sm font-semibold text-indigo-700">
-                                                    <div>Lanjut ke daftar ujian</div>
-                                                    <div class="ml-1 text-indigo-500">
-                                                        <svg viewBox="0 0 20 20" fill="currentColor" class="arrow-right w-4 h-4"><path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
-                                                    </div>
-                                                </div>
-                                            </inertia-link>
+                                            <link-arrow href="/creator/exams">Lanjut ke daftar ujian</link-arrow>
                                         </div>
                                     </div>
                                 </div>
@@ -89,14 +73,7 @@
                                             <div class="mt-2 text-sm text-gray-500">
                                                 Hasil Ujian. Daftar peserta yang telah mengerjakan ujian akan ditampilkan pada halaman ini.
                                             </div>
-                                            <inertia-link :href="'/creator/results'">
-                                                <div class="mt-3 flex items-center text-sm font-semibold text-indigo-700">
-                                                    <div>Lanjut ke daftar ujian</div>
-                                                    <div class="ml-1 text-indigo-500">
-                                                        <svg viewBox="0 0 20 20" fill="currentColor" class="arrow-right w-4 h-4"><path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
-                                                    </div>
-                                                </div>
-                                            </inertia-link>
+                                            <link-arrow href="/creator/results">Lanjut ke daftar hasil ujian</link-arrow>
                                         </div>
                                     </div>
                                 </div>
@@ -110,13 +87,15 @@
 </template>
 
 <script>
-import Layout from "@/Layouts/AppLayout";
-import Icon from "@/Shared/Icon";
+import Layout from '@/Layouts/AppLayout'
+import Icon from '@/Shared/Icon'
+import LinkArrow from '@/Shared/LinkArrow'
 
 export default {
     components: {
         Layout,
         Icon,
+        LinkArrow,
     },
 };
 </script>

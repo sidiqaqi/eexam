@@ -55,9 +55,9 @@ class ExamController extends Controller
      */
     public function store(StoreRequest $request)
     {
-        $exam = Exam::create($request->data());
+        $exam = Exam::query()->create($request->data());
 
-        Config::create(ConfigService::defaultConfig($exam));
+        Config::query()->create(ConfigService::defaultConfig($exam));
 
         return redirect()->route('creator.exams.edit', $exam->uuid)
             ->with('success', __('notification.success.add', ['model' => __('Exam')]));

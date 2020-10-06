@@ -13,7 +13,7 @@ class ConfigController extends Controller
     {
         $config->update($request->data());
 
-        return redirect()->route('creator.exams.edit', Exam::find($config->exam_id)->uuid)
+        return redirect()->route('creator.exams.edit', Exam::query()->find($config->exam_id)->uuid)
             ->with('success', __('notification.success.update', ['model' => __('Config')]));
     }
 }

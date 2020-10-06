@@ -24,6 +24,25 @@ class ParticipantService
         return static::$service->join($exam);
     }
 
+    public static function validateStatus(Participant $participant, $section = null, $answer = null)
+    {
+        self::onGoingRouter($participant);
+
+        return static::$service->validateStatus($participant, $section, $answer);
+    }
+
+    public static function onGoingRouter(Participant $participant)
+    {
+        $config = json_decode($participant->cache_config);
+
+        if ($config->time_mode == TimeMode::TimeLimit) {
+            static::$service = new TimeLimitExam();
+        } else {
+            static::$service = new BasicExam();
+        }
+
+    }
+
     public static function examRouter(Exam $exam)
     {
         $config = $exam->config;
@@ -36,7 +55,8 @@ class ParticipantService
 
     public static function getParticipantAnswers(Participant $participant)
     {
-        return Answer::withSectionOrder()
+        return Answer::query()
+            ->withSectionOrder()
             ->withOptionUuid()
             ->where('participant_id', $participant->id)
             ->orderBy('section_order', 'asc')
@@ -72,7 +92,7 @@ class ParticipantService
         return route('participant.exams.section', [
             'participant' => $participant->uuid,
             'answer' => $nextAnswer->uuid,
-            'section' => Section::find($nextAnswer->section_id)->uuid,
+            'section' => Section::query()->find($nextAnswer->section_id)->uuid,
         ]);
     }
 

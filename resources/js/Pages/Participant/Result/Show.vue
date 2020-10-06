@@ -26,7 +26,7 @@
                                 <div class="flex items-center">
                                     <icon name="file-check" class="w-8 h-8 text-gray-400" />
                                     <div class="ml-4 text-lg text-gray-600 leading-7 font-semibold">
-                                        <a href="/creator/menu">Hasil</a>
+                                        Hasil
                                     </div>
                                 </div>
                                 <div class="ml-12">
@@ -34,7 +34,7 @@
                                         <div v-if="report.config.result_status == 1 || report.config.result_status == 2">
                                             <strong>{{ report.result }}</strong>
                                         </div>
-                                        <div v-else="report.config.result_status == 3">
+                                        <div v-if="report.config.result_status == 3">
                                             <p> Tidak ditampilkan </p>
                                         </div>
                                     </div>
@@ -44,7 +44,7 @@
                                 <div class="flex items-center">
                                     <icon name="file-check" class="w-8 h-8 text-gray-400" />
                                     <div class="ml-4 text-lg text-gray-600 leading-7 font-semibold">
-                                        <a href="/creator/menu">Rekapitulasi</a>
+                                        Rekapitulasi
                                     </div>
                                 </div>
                                 <div class="ml-12">
@@ -70,7 +70,7 @@
                                 <div class="flex items-center">
                                     <icon name="graph-up" class="w-8 h-8 text-gray-400" />
                                     <div class="ml-4 text-lg text-gray-600 leading-7 font-semibold">
-                                        <a href="/participant/menu">Ranking</a>
+                                        Ranking
                                     </div>
                                 </div>
                                 <div class="ml-12">

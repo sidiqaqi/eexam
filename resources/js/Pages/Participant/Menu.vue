@@ -33,16 +33,7 @@
                                             <div class="mt-2 text-sm text-gray-500">
                                                 Mengikuti ujian yang ada dengan memasukan kode ujian yang valid.
                                             </div>
-                                            <inertia-link :href="'/participant/exams/form'">
-                                                <div class="mt-3 flex items-center text-sm font-semibold text-indigo-700">
-                                                    <div>
-                                                        Lanjut mengikuti ujian
-                                                    </div>
-                                                    <div class="ml-1 text-indigo-500">
-                                                        <svg viewBox="0 0 20 20" fill="currentColor" class="arrow-right w-4 h-4"><path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
-                                                    </div>
-                                                </div>
-                                            </inertia-link>
+                                            <link-arrow href="/participant/exams/form">Lanjut mengikuti ujian</link-arrow>
                                         </div>
                                     </div>
                                 </div>
@@ -62,14 +53,7 @@
                                             <div class="mt-2 text-sm text-gray-500">
                                                 Hasil ujian telah anda ikuti.
                                             </div>
-                                            <inertia-link :href="'/participant/results'">
-                                                <div class="mt-3 flex items-center text-sm font-semibold text-indigo-700">
-                                                    <div>Lanjut ke hasil ujian</div>
-                                                    <div class="ml-1 text-indigo-500">
-                                                        <svg viewBox="0 0 20 20" fill="currentColor" class="arrow-right w-4 h-4"><path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
-                                                    </div>
-                                                </div>
-                                            </inertia-link>
+                                            <link-arrow href="/participant/results">Lanjut ke hasil ujian</link-arrow>
                                         </div>
                                     </div>
                                 </div>
@@ -83,13 +67,15 @@
 </template>
 
 <script>
-import Layout from "@/Layouts/AppLayout";
-import Icon from "@/Shared/Icon";
+import Layout from '@/Layouts/AppLayout'
+import Icon from '@/Shared/Icon'
+import LinkArrow from '@/Shared/LinkArrow'
 
 export default {
     components: {
         Layout,
         Icon,
+        LinkArrow,
     },
 };
 </script>

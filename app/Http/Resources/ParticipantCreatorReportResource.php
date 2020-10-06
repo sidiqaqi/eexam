@@ -2,6 +2,7 @@
 
 namespace App\Http\Resources;
 
+use App\Enums\RecapResultStatus;
 use Illuminate\Http\Resources\Json\JsonResource;
 use function PHPUnit\Framework\isNull;
 
@@ -12,6 +13,7 @@ use function PHPUnit\Framework\isNull;
  * @property mixed uuid
  * @property mixed status
  * @property mixed participant
+ * @property mixed total_score
  */
 class ParticipantCreatorReportResource extends JsonResource
 {
@@ -27,7 +29,9 @@ class ParticipantCreatorReportResource extends JsonResource
             'uuid' => $this->participant->uuid,
             'name' => $this->user->name,
             'rank' => $this->rank,
-            'on_going' => $this->status ? 0 : 1,
+            'score' => $this->total_score,
+            'result' => RecapResultStatus::getDescription($this->status),
+            'on_going' => isset($this->participant->finish_at) ? 0 : 1,
         ];
     }
 }

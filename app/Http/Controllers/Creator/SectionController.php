@@ -46,7 +46,7 @@ class SectionController extends Controller
      */
     public function store(StoreRequest $request, Exam $exam)
     {
-        Section::create($request->data($exam));
+        Section::query()->create($request->data($exam));
 
         return redirect()->route('creator.sections.index', $exam->uuid)
             ->with('success', __('notification.success.add', ['model' => __('Section')]));

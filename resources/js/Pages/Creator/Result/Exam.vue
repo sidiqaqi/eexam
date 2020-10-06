@@ -6,7 +6,7 @@
     >
         <template v-slot:header>
             <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-                Hasil Ujian
+                Daftar Peserta Ujian: {{ exam.data.name }}
             </h2>
         </template>
 
@@ -18,7 +18,9 @@
                         <tr class="bg-white border border-gray-300">
                             <th class="py-3">Nama Peserta</th>
                             <th class="py-3">Rank</th>
-                            <th class="py-3">Status</th>
+                            <th class="py-3">Hasil</th>
+                            <th class="py-3">Score</th>
+                            <th class="py-3">Proses Ujian</th>
                             <th class="py-3">Aksi</th>
                         </tr>
                         </thead>
@@ -26,6 +28,8 @@
                         <tr v-for="participant in participants.data" :key="participant.uuid">
                             <td class="align-middle border px-4 py-2">{{ participant.name }}</td>
                             <td class="align-middle border px-4 py-2">{{ participant.rank }}</td>
+                            <td class="align-middle border px-4 py-2">{{ participant.result }}</td>
+                            <td class="align-middle border px-4 py-2">{{ participant.score }}</td>
                             <td class="align-middle border px-4 py-2">
                                 <span v-if="participant.on_going"> Dalam proses</span>
                                 <span v-else>Selesai</span>
@@ -62,6 +66,7 @@ import JetDropdown from "@/Jetstream/Dropdown";
 export default {
     props: {
         participants: Object,
+        exam: Object,
     },
     components: {
         Layout,

@@ -70,12 +70,25 @@ class ExamController extends Controller
     /**
      * @param ProcessRequest $request
      * @param Participant $participant
+     * @param Exam $exam
+     * @return mixed
+     */
+    public function continue(ProcessRequest $request, Participant $participant, Exam $exam)
+    {
+        return ParticipantService::join($exam);
+    }
+
+    /**
+     * @param ProcessRequest $request
+     * @param Participant $participant
      * @param Answer $answer
      * @param Section $section
      * @return \Inertia\Response
      */
     public function section(ProcessRequest $request, Participant $participant, Answer $answer, Section $section)
     {
+        ParticipantService::validateStatus($participant, $section, $answer);
+
         $exam = $participant->exam;
 
         return Inertia::render('Participant/Exam/Section', [
@@ -101,13 +114,15 @@ class ExamController extends Controller
      */
     public function process(ProcessRequest $request, Participant $participant, Answer $answer)
     {
+        ParticipantService::validateStatus($participant);
+
         $exam = $participant->exam;
 
         $answers = ParticipantService::getParticipantAnswers($participant);
 
         return Inertia::render('Participant/Exam/Process', [
             'answer' => function () use ($answer) {
-                return new AnswerResource(Answer::withOptionUuid()->where('id', $answer->id)->first());
+                return new AnswerResource(Answer::query()->withOptionUuid()->where('id', $answer->id)->first());
             },
             'answers' => AnswerResource::collection($answers),
             'config' => new ConfigResource($exam->config),
@@ -133,6 +148,8 @@ class ExamController extends Controller
      */
     public function submit(ProcessRequest $request, Participant $participant, Answer $answer, Option $option)
     {
+        ParticipantService::validateStatus($participant);
+
         $answer->option_id = $option->id;
         $answer->is_correct = $option->correct_id;
         $answer->score = $option->correct_id == CorrectStatus::True ? ParticipantService::getScore($participant, $answer) : 0;

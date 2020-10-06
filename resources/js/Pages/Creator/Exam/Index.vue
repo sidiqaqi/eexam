@@ -13,11 +13,7 @@
         <div>
             <div class="max-w-7xl mx-auto py-10 sm:px-6 lg:px-8">
                 <div class="grid sm:grid-cols-2 gap-4 justify-items-start">
-                    <inertia-link
-                        class="px-4 py-2 bg-gray-900 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:shadow-outline-gray transition ease-in-out duration-150"
-                        href="/creator/exams/create"
-                    >Buat ujian
-                    </inertia-link>
+                    <link-default href="/creator/exams/create">Buat Ujian</link-default>
                     <div class="flex items-center border-b border-teal-500 sm:w-64 justify-self-end">
                         <input v-model="form.search"
                                class="appearance-none bg-transparent border-none w-full text-gray-700 mr-3 py-1 px-2 leading-tight focus:outline-none"
@@ -122,15 +118,16 @@
 </template>
 
 <script>
-import Layout from "@/Layouts/AppLayout"
-import Icon from "@/Shared/Icon"
+import Layout from '@/Layouts/AppLayout'
+import Icon from '@/Shared/Icon'
 import pickBy from 'lodash/pickBy'
 import throttle from 'lodash/throttle'
 import JetDialogModal from '@/Jetstream/DialogModal'
 import JetDangerButton from '@/Jetstream/DangerButton'
 import JetSecondaryButton from '@/Jetstream/SecondaryButton'
-import Pagination from "@/Shared/Pagination";
-import JetDropdown from "@/Jetstream/Dropdown";
+import Pagination from '@/Shared/Pagination'
+import JetDropdown from '@/Jetstream/Dropdown'
+import LinkDefault from '@/Shared/LinkDefault'
 
 
 export default {
@@ -140,6 +137,7 @@ export default {
     },
     components: {
         Layout,
+        LinkDefault,
         Icon,
         JetDialogModal,
         JetDangerButton,

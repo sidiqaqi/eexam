@@ -55,7 +55,7 @@ class QuestionController extends Controller
     {
         DB::beginTransaction();
 
-        $question = Question::create($request->dataQuestion($section));
+        $question = Question::query()->create($request->dataQuestion($section));
 
         OptionService::storeOptions($question, $request->dataOptions());
 

@@ -35,11 +35,22 @@ class Recap extends Model
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
+    public function examModel()
+    {
+        return $this->belongsTo('App\Models\Exam', 'exam_id', 'id');
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
     public function participant()
     {
         return $this->belongsTo('App\Models\Participant');
     }
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
     public function user()
     {
         return $this->belongsTo('App\Models\User');

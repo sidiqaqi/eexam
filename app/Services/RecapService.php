@@ -181,6 +181,8 @@ class RecapService
 
         $report->config = $parseConfig;
 
+        $report->participant_name = $participant->user->name;
+
         if ($config->result_status == ResultStatus::RecapAndResult) {
 
             $report->result = isset($recap->result->status) ? RecapResultStatus::getDescription($recap->result->status)

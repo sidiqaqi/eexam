@@ -3,10 +3,8 @@
 namespace App\Services\Exams;
 
 use App\Models\Answer;
-use App\Enums\TimeMode;
 use App\Models\Exam;
 use App\Models\Participant;
-use App\Models\Recap;
 use App\Services\RecapService;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
@@ -47,7 +45,7 @@ class BasicExam
             }
         }
 
-        $participant = Participant::find($participant->getAttribute('id'));
+        $participant = Participant::query()->find($participant->getAttribute('id'));
 
         RecapService::init($participant);
 
@@ -69,7 +67,8 @@ class BasicExam
 
     public function ListQuestion(Participant $participant)
     {
-        return Answer::withSectionOrder()
+        return Answer::query()
+            ->withSectionOrder()
             ->where('participant_id', $participant->id)
             ->orderBy('section_order', 'asc')
             ->orderBy('id', 'asc')
@@ -82,13 +81,15 @@ class BasicExam
      */
     public function firstQuestion(Participant $participant)
     {
-        return Answer::withSectionOrder()
+        return Answer::query()
+            ->withSectionOrder()
             ->where('participant_id', $participant->id)
             ->where('option_id', NULL)
             ->orderBy('section_order', 'asc')
             ->orderBy('id', 'asc')
             ->first()
-            ?? Answer::withSectionOrder()
+            ?? Answer::query()
+                ->withSectionOrder()
                 ->where('participant_id', $participant->id)
                 ->orderBy('section_order', 'asc')
                 ->orderBy('id', 'desc')
@@ -108,6 +109,11 @@ class BasicExam
             return false;
         }
 
+        return true;
+    }
+
+    public function validateStatus(Participant $participant, $section, $answer)
+    {
         return true;
     }
 
