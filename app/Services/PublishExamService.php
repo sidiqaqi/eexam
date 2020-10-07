@@ -70,9 +70,22 @@ class PublishExamService
             };
         } else {
             foreach ($sections as $section) {
-                if ($section->passing_grade > $section->questions()->count() * $section->score_per_question) {
-                    return new self(['exam' => [__('validation.need_question')]]);
+
+                if ($config->score_status == ScoreStatus::Global) {
+                    if ($section->passing_grade > $section->questions()->count() * $config->default_score) {
+                        return new self(['exam' => [__('validation.need_question')]]);
+                    }
+                } elseif ($config->score_status == ScoreStatus::Section) {
+                    if ($section->passing_grade > $section->questions()->count() * $section->score_per_question) {
+                        return new self(['exam' => [__('validation.need_question')]]);
+                    }
+                } else {
+                    if ($section->passing_grade > $section->questions()->sum('score')) {
+                        return new self(['exam' => [__('validation.need_question')]]);
+                    }
                 }
+
+
             }
         }
 

@@ -7,7 +7,7 @@
                 <inertia-link :href="'/creator/exams/' + exam.uuid + '/edit'" type="submit">{{ exam.name }}
                 </inertia-link>
                 /
-                <inertia-link :href="'creator/sections/' + exam.uuid" type="submit">Daftar Sesi</inertia-link>
+                <inertia-link :href="'/creator/sections/' + exam.uuid" type="submit">Daftar Sesi</inertia-link>
                 /
                 <inertia-link :href="'/creator/questions/' + section.uuid" type="submit">{{ section.name }}
                 </inertia-link>
