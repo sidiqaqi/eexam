@@ -70,7 +70,7 @@ class PublishExamService
             };
         } else {
             foreach ($sections as $section) {
-                if ($section->passing_grade > $section->questions()->cont() * $section->score_per_question) {
+                if ($section->passing_grade > $section->questions()->count() * $section->score_per_question) {
                     return new self(['exam' => [__('validation.need_question')]]);
                 }
             }

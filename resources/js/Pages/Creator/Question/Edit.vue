@@ -36,15 +36,15 @@
                                 />
                             </div>
                             <ol class="ml-5 mt-4" style="list-style: upper-latin" type="A">
-                                <li v-for="(option, key) in form.options" v-if="option.value" :key="key" class="prose">
+                                <li v-for="(option, key) in form.options" :key="key" class="prose">
                                     <img
-                                        v-if="option.type == 2"
+                                        v-if="option.type == 2 && option.value"
                                         :src="option.image || '/img/404.jpg'"
                                         alt="preview"
                                         class="img-fluid border"
                                         @error="imgError"
                                     />
-                                    <span v-else>{{ option.value }}</span>
+                                    <span v-else-if="option.value">{{ option.value }}</span>
                                 </li>
                             </ol>
                         </div>
