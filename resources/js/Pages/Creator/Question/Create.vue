@@ -137,10 +137,8 @@
                                     />
                                 </div>
                                 <div  class="inline">
-                                    <jet-button class="py-3" v-if="answer === option.key" @click.native="correct(key)">Benar
-                                    </jet-button>
-                                    <jet-secondary-button class="py-3" v-else @click.native="correct(key)">Salah
-                                    </jet-secondary-button>
+                                    <jet-button class="py-3" v-if="answer === option.key"  type="button"  @click.native="correct(key)">Benar</jet-button>
+                                    <jet-secondary-button class="py-3"  type="button"  v-else @click.native="correct(key)">Salah</jet-secondary-button>
                                     <jet-danger-button
                                         class="py-3"
                                         type="button"
