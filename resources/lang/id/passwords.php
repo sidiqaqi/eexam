@@ -15,7 +15,7 @@ return [
 
     'reset' => 'Password anda telah di reset!',
     'sent' => 'Kami telah mengirim link untuk reset password!',
-    'throttled' => 'Mohon tunggu beberapa waktu sebelum mencoba kemabali.',
+    'throttled' => 'Mohon tunggu beberapa waktu sebelum mencoba kembali.',
     'token' => 'Password reset token tidak valid.',
     'user' => "Kami tidak dapat menemukan user dengan email tersebut.",
 
