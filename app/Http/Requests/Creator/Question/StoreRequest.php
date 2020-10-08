@@ -107,6 +107,7 @@ class StoreRequest extends FormRequest
             'options.*.image.required_if' => __('validation.required', ['attribute' => __('validation.attributes.options')]),
             'options.*.value.distinct' => __('validation.distinct', ['attribute' => __('validation.attributes.options')]),
             'options.*.image.distinct' => __('validation.distinct', ['attribute' => __('validation.attributes.options')]),
+            'options.*.image.active_url' => __('validation.active_url', ['attribute' => __('validation.attributes.options')]),
         ];
     }
 
@@ -150,5 +151,19 @@ class StoreRequest extends FormRequest
                 'score' => 10,
             ]);
         }
+
+        $options = [];
+
+        foreach ($this->options as $opt) {
+            if ($opt['type'] == InputType::Text) {
+                $opt['image'] = null;
+            }
+
+            $options[] = $opt;
+        }
+
+        $this->merge([
+            'options' => $options,
+        ]);
     }
 }

@@ -38,7 +38,7 @@
                             <ol class="ml-5 mt-4" type="A" style="list-style: upper-latin">
                                 <li v-for="(option, key) in form.options" :key="key" class="prose">
                                     <img
-                                        v-if="option.type == 2 && option.value"
+                                        v-if="option.type == 2"
                                         :src="option.image || '/img/404.jpg'"
                                         alt="preview"
                                         class="img-fluid border"
