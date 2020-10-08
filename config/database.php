@@ -144,4 +144,5 @@ return [
 
     ],
 
+    'old' => env('DB_OLD_SUPPORT' , false),
 ];
