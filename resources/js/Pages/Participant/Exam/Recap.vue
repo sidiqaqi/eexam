@@ -19,12 +19,12 @@
 
                     <div class="col-span-3 md:col-span-1 p-3 mb-5">
                         <b> Indeks: </b>
-                        <div class="row mt-3">
+                        <div class="flex flex-wrap mt-3">
                             <inertia-link
                                 v-for="(answerItem, index) in answers.data"
                                 :key="answerItem.uuid"
                                 :href="'/participant/exams/process/' + participant.data.uuid + '/' + answerItem.uuid"
-                                class="border py-2 px-4"
+                                class="flex m-1 border py-2 px-4"
                                 type="submit"
                                 v-bind:class="{ 'bg-green-300' : answerItem.filled }">
                                 {{ index + 1 }}

@@ -90,18 +90,18 @@
                                 <p><b> Indeks: </b></p>
                                 <p>Anda telah mengerjakan <b>{{ totalFilled }}</b> dari <b>{{ totalQuestion }}</b> Soal.</p>
                             </div>
-                            <div class="row mt-3">
+                            <div class="flex flex-wrap mt-3">
                                 <inertia-link
                                     v-for="(answerItem, index) in answers.data"
                                     :key="answerItem.uuid"
                                     :href="'/participant/exams/process/' + participant.data.uuid + '/' + answerItem.uuid"
-                                    class="border py-2 px-4"
+                                    class="flex m-1 border py-2 px-4"
                                     v-bind:class="{ 'bg-green-300' : answerItem.filled && !isActiveAnswer(answerItem.uuid) ,'bg-gray-300' : isActiveAnswer(answerItem.uuid)}">
                                     {{ index + 1 }}
                                 </inertia-link>
                                 <inertia-link
                                     :href="'/participant/exams/recap/' + participant.data.uuid"
-                                    class="border py-2 px-4">Selesai
+                                    class="flex m-1 border py-2 px-4">Selesai
                                 </inertia-link>
                             </div>
                         </div>
