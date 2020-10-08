@@ -6,7 +6,7 @@
                 Proses Ujian: {{ exam.data.name }}
             </h2>
 
-            <vue-countdown v-if="config.data.time_mode === 2" :time="time_limit" tag="p" @end="forceFinish">
+            <vue-countdown v-if="config.data.time_mode == 2" :time="time_limit" tag="p" @end="forceFinish">
                 <template
                     slot-scope="props"
                 >Time Remaining：{{ props.minutes }} minutes, {{ props.seconds }} seconds.</template>

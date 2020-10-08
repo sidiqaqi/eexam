@@ -22,7 +22,7 @@
                             Pengaturan Ujian:
                             <ul style="list-style: disc">
                                 <li>Waktu pengerjaan: <strong>{{ config.data.time_mode_text }} <span
-                                    v-if="config.data.time_mode === 2">({{ config.data.time_limit }})</span></strong></li>
+                                    v-if="config.data.time_mode == 2">({{ config.data.time_limit }})</span></strong></li>
                                 <li>Urutan Pertanyaan : <strong>{{ config.data.question_order }}</strong></li>
                                 <li>Urutan jawaban : <strong>{{ config.data.answer_order }}</strong></li>
                                 <li>Menampilakan Hasil : <strong>{{ config.data.result_status }}</strong></li>
