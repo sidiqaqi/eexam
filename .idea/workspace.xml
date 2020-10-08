@@ -2,24 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="f5ae4a9d-4b12-4d97-b582-355f7df0cf15" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/resources/js/Pages/Creator/Result/Exam.vue" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/js/Pages/Creator/Result/Index.vue" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/js/Pages/Creator/Result/Participant.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.env.example" beforeDir="false" afterPath="$PROJECT_DIR$/.env.example" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Creator/ResultController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Creator/ResultController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Models/Exam.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Models/Exam.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Models/Participant.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Models/Participant.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Models/Recap.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Models/Recap.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Services/RecapService.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Services/RecapService.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/migrations/2020_09_25_115204_create_recaps_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2020_09_25_115204_create_recaps_table.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/css/app.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/css/app.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/js/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/js/app.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/js/manifest.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/js/manifest.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/js/vendor.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/js/vendor.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/mix-manifest.json" beforeDir="false" afterPath="$PROJECT_DIR$/public/mix-manifest.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/js/Pages/Creator/Menu.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/Pages/Creator/Menu.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/database.php" beforeDir="false" afterPath="$PROJECT_DIR$/config/database.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -219,7 +204,8 @@
       <workItem from="1601018380103" duration="7735000" />
       <workItem from="1601027089768" duration="20772000" />
       <workItem from="1601091994875" duration="16820000" />
-      <workItem from="1601538303727" duration="21009000" />
+      <workItem from="1601538303727" duration="21111000" />
+      <workItem from="1602158092081" duration="119000" />
     </task>
     <servers />
   </component>
